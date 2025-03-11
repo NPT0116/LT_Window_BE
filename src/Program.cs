@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using src.Data;
 using src.Middlewares;
 using src.Utils;
 using System.Reflection; // Needed for Assembly
@@ -13,6 +14,10 @@ builder.Services.AddLogging(loggingBuilder =>
     loggingBuilder.AddDebug();   // Log to debug output
 });
 builder.Services.AddProblemDetails();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 builder.Services.AddExceptionHandler<GlobalExceptionHandlers>();
 
 // Add services to the container.
