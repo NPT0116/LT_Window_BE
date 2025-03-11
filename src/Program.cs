@@ -1,12 +1,8 @@
-using BE.Config;
-using BE.Data;
-using BE.Interface;
-using BE.Middlewares;
-using BE.Repository;
-using BE.Services;
-using BE.Utils;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using src.Middlewares;
+using src.Utils;
 using System.Reflection; // Needed for Assembly
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +13,7 @@ builder.Services.AddLogging(loggingBuilder =>
     loggingBuilder.AddDebug();   // Log to debug output
 });
 builder.Services.AddProblemDetails();
-builder.Configuration.AddJsonFile("seedData.json", optional: true, reloadOnChange: true);
+builder.Services.AddExceptionHandler<GlobalExceptionHandlers>();
 
 // Add services to the container.
 builder.Services.AddOpenApi();
@@ -80,11 +76,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-var logger = app.Services.GetRequiredService<ILogger<Program>>(); // Get logger instance
-var assembly = Assembly.GetExecutingAssembly();
-var version = assembly.GetName().Version?.ToString() ?? "Unknown";
-var buildDate = System.IO.File.GetLastWriteTime(assembly.Location).ToString("yyyy-MM-dd HH:mm:ss");
-logger.LogInformation("Application Version: {Version}, Build Date: {BuildDate}", version, buildDate);
 
 app.UseHttpsRedirection();
 app.UseExceptionHandler(); // Works
