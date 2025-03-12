@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using src.Data;
+using src.Interfaces;
 using src.Middlewares;
+using src.Repositories;
 using src.Services;
 using src.Utils;
 using System.Reflection; // Needed for Assembly
@@ -31,15 +33,23 @@ builder.Services.AddExceptionHandler<GlobalExceptionHandlers>();
 builder.Services.AddTransient<SeedService>();
 builder.Services.AddHostedService<ApplyMigrationService>();
 // Add services to the container.
+
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+// dependency injection
+builder.Services.AddScoped<IItemGroupRepository, ItemGroupRepository>();
+builder.Services.AddScoped<IVariantRepository, VariantRepository>();    
+builder.Services.AddScoped<IItemRepository, ItemRepository>();
+builder.Services.AddScoped<IColorRepository, ColorRepository>();
+builder.Services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Student management API",
+        Title = "Phone API",
         Version = "v1",
-        Description = "API for Student Management System"
+        Description = "API for Phone system management"
     });
     c.OperationFilter<FileUploadOperationFilter>();
 
