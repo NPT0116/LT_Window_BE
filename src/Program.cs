@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using src.Data;
 using src.Middlewares;
+using src.Services;
 using src.Utils;
 using System.Reflection; // Needed for Assembly
 
@@ -14,13 +15,23 @@ builder.Services.AddLogging(loggingBuilder =>
     loggingBuilder.AddDebug();   // Log to debug output
 });
 builder.Services.AddProblemDetails();
+// ------------------- add json file
+builder.Configuration.AddJsonFile("seedData.json", optional: true, reloadOnChange: true);
+// DB configuration ----------
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+// --global exception handler
 builder.Services.AddExceptionHandler<GlobalExceptionHandlers>();
 
+
+// --Util services like migrations 
+builder.Services.AddTransient<SeedService>();
+builder.Services.AddHostedService<ApplyMigrationService>();
 // Add services to the container.
+builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen(c =>
 {

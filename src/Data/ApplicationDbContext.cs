@@ -19,6 +19,8 @@ public class ApplicationDbContext: DbContext
          public DbSet<Customer> Customers { get; set; }
          public DbSet<Invoice> Invoices { get; set; }
          public DbSet<InvoiceDetail> InvoiceDetails { get; set; }
+                  public DbSet<Color> Colors { get; set; }
+
           protected override void OnModelCreating(ModelBuilder modelBuilder)
          {
              base.OnModelCreating(modelBuilder);

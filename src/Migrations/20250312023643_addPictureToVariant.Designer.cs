@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using src.Data;
@@ -11,9 +12,11 @@ using src.Data;
 namespace src.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250312023643_addPictureToVariant")]
+    partial class addPictureToVariant
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,30 +24,6 @@ namespace src.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("src.Models.Color", b =>
-                {
-                    b.Property<Guid>("ColorID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ItemID")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("UrlImage")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("ColorID");
-
-                    b.HasIndex("ItemID");
-
-                    b.ToTable("Colors");
-                });
 
             modelBuilder.Entity("src.Models.Customer", b =>
                 {
@@ -214,14 +193,17 @@ namespace src.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("ColorID")
-                        .HasColumnType("uuid");
+                    b.Property<string>("Color")
+                        .HasColumnType("text");
 
                     b.Property<float>("CostPrice")
                         .HasColumnType("real");
 
                     b.Property<Guid>("ItemID")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("Picture")
+                        .HasColumnType("text");
 
                     b.Property<float>("SellingPrice")
                         .HasColumnType("real");
@@ -234,22 +216,9 @@ namespace src.Migrations
 
                     b.HasKey("VariantID");
 
-                    b.HasIndex("ColorID");
-
                     b.HasIndex("ItemID");
 
                     b.ToTable("Variants");
-                });
-
-            modelBuilder.Entity("src.Models.Color", b =>
-                {
-                    b.HasOne("src.Models.Item", "Item")
-                        .WithMany("Colors")
-                        .HasForeignKey("ItemID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("src.Models.Inventory", b =>
@@ -314,19 +283,11 @@ namespace src.Migrations
 
             modelBuilder.Entity("src.Models.Variant", b =>
                 {
-                    b.HasOne("src.Models.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("src.Models.Item", "Item")
                         .WithMany("Variants")
                         .HasForeignKey("ItemID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Color");
 
                     b.Navigation("Item");
                 });
@@ -343,8 +304,6 @@ namespace src.Migrations
 
             modelBuilder.Entity("src.Models.Item", b =>
                 {
-                    b.Navigation("Colors");
-
                     b.Navigation("Variants");
                 });
 
