@@ -49,5 +49,13 @@ namespace src.Controllers
             await _itemGroupRepository.SaveChangesAsync();
             return Ok(new Response<ItemGroupDto>(new ItemGroupDto{ ItemGroupID = itemGroupCreate.ItemGroupID, ItemGroupName=itemGroupCreate.ItemGroupName}, "ItemGroup created successfully", true));
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _itemGroupRepository.DeleteItemGroupAsync(id);
+            await _itemGroupRepository.SaveChangesAsync();
+            return Ok(new Response<object>(null, "ItemGroup deleted successfully", true));
+        }        
     }
 }

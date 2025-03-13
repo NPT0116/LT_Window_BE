@@ -55,5 +55,11 @@ namespace src.Controllers
             var pagedResponse = await _variantRepository.GetAllVariantsAsync(queryParameters);
             return Ok(pagedResponse);
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _variantRepository.DeleteVariantAsync(id);
+            return Ok(new Response<object>(null, "Variant deleted successfully", true));
+        }
     }
 }

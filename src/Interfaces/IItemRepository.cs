@@ -14,6 +14,6 @@ public interface IItemRepository
     Task CreateFullItem(CreateFullItemDto entity);
     Task<ItemDto> AddAsync(ItemCreateDto entity);
     void Update(UpdateItemDto entity);
-    void Delete(Item entity);
+    Task DeleteItemAsync(Guid itemId);
     Task SaveChangesAsync();
 }

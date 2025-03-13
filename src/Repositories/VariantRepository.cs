@@ -175,5 +175,38 @@ if (!string.IsNullOrEmpty(parameters.Search))
 
             return pagedResponse;
         }
+         public async Task DeleteVariantAsync(Guid variantId)
+        {
+            var variant = await _context.Variants.FindAsync(variantId);
+            if (variant == null)
+            {
+                throw new VariantNotFound(variantId);
+            }
+            // Kiểm tra xem variant có liên quan đến InvoiceDetail hay InventoryTransaction không
+            bool hasInvoice = await _context.InvoiceDetails.AnyAsync(id => id.VariantID == variantId);
+            bool hasInventoryTransaction = await _context.InventoryTransactions.AnyAsync(it => it.VariantID == variantId);
+            if (hasInvoice || hasInventoryTransaction)
+            {
+                throw new VariantExistsTransactionOrInvoice(variantId);
+            }
+            // Lưu trữ ColorID của Variant trước khi xóa
+            Guid colorId = variant.ColorID;
+
+            // Xóa Variant
+            _context.Variants.Remove(variant);
+            await _context.SaveChangesAsync();
+
+            // Kiểm tra xem Color đó còn được sử dụng bởi Variant nào khác không
+            bool colorInUse = await _context.Variants.AnyAsync(v => v.ColorID == colorId);
+            if (!colorInUse)
+            {
+                var color = await _context.Colors.FindAsync(colorId);
+                if (color != null)
+                {
+                    _context.Colors.Remove(color);
+                    await _context.SaveChangesAsync();
+                }
+            }
+        }
     }
 }
