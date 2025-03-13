@@ -5,5 +5,5 @@ namespace src.Interfaces;
 
 public interface IVariantRepository
 {
-    Task<VariantDto> GetVariantByItemIdAsync(Guid id);
+    Task<List<VariantDto>> GetVariantByItemIdAsync(Guid id);
 }

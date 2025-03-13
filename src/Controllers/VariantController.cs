@@ -25,7 +25,7 @@ namespace src.Controllers
             var variantDto = await _variantRepository.GetVariantByItemIdAsync(itemId);
             if (variantDto == null)
                 return NotFound(new Response<object>(null, "Variant not found", false));
-            return Ok(new Response<VariantDto>(variantDto));
+            return Ok(new Response<List<VariantDto>>(variantDto));
         }
     }
 }
