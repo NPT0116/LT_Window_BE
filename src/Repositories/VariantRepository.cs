@@ -103,9 +103,9 @@ if (!string.IsNullOrEmpty(parameters.Search))
                 query = query.Where(v => v.Storage == parameters.StorageFilter);
             }
 
-            if (!string.IsNullOrEmpty(parameters.ManufacturerFilter))
+            if (parameters.ManufacturerFilter != null)
             {
-                query = query.Where(v => v.Item.Manufacturer.ManufacturerName.Contains(parameters.ManufacturerFilter));
+                query = query.Where(v => v.Item.Manufacturer.ManufacturerID == parameters.ManufacturerFilter);
             }
 
             if (!string.IsNullOrEmpty(parameters.SortBy))
