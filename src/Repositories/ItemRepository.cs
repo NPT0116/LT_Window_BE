@@ -132,10 +132,42 @@ namespace src.Repositories
 
         }
 
-        public void Delete(Item entity)
+    public async Task DeleteItemAsync(Guid itemId)
         {
-            // Xóa entity khỏi context
-            _context.Items.Remove(entity);
+            // Lấy Item kèm theo các Variant của nó
+            var item = await _context.Items
+                .Include(i => i.Variants)
+                .FirstOrDefaultAsync(i => i.ItemID == itemId);
+
+            if (item == null)
+                throw new ItemNotFound(itemId);
+            // Kiểm tra các Variant của item có liên quan đến InvoiceDetail hoặc InventoryTransaction không
+            foreach (var variant in item.Variants)
+            {
+                bool hasInvoice = await _context.InvoiceDetails.AnyAsync(id => id.VariantID == variant.VariantID);
+                bool hasInventoryTransaction = await _context.InventoryTransactions.AnyAsync(it => it.VariantID == variant.VariantID);
+
+                if (hasInvoice || hasInventoryTransaction)
+                    throw new CantDeleteItem(itemId);
+            }
+
+            // Nếu không có liên quan, xóa các Variant của Item
+            foreach (var variant in item.Variants)
+            {
+                _context.Variants.Remove(variant);
+            }
+
+            // Xóa các Color liên quan (Color có ItemID bằng ItemID của item)
+            var colors = await _context.Colors.Where(c => c.ItemID == item.ItemID).ToListAsync();
+            foreach (var color in colors)
+            {
+                _context.Colors.Remove(color);
+            }
+
+            // Xóa Item
+            _context.Items.Remove(item);
+
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<ItemDto>> GetAllAsync()

@@ -80,5 +80,11 @@ namespace src.Controllers
             await _itemRepository.SaveChangesAsync();
             return Ok(new Response<UpdateItemDto>(item, "Item updated successfully", true));
         }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteItem(Guid id)
+        {
+            await _itemRepository.DeleteItemAsync(id);
+            return Ok(new Response<object>(null, "Item deleted successfully", true));
+        }
     }
 }

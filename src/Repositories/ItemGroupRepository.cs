@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using src.Data;
 using src.Dto;
 using src.Dto.ItemGroup;
+using src.Exceptions.ItemGroup;
 using src.Interfaces;
 using src.Models;
 using System;
@@ -53,15 +54,31 @@ namespace src.Repositories
             _context.ItemGroups.Update(entity);
         }
 
-        public void Delete(ItemGroup entity)
+   public async Task DeleteItemGroupAsync(Guid itemGroupId)
         {
-            _context.ItemGroups.Remove(entity);
+            var itemGroup = await _context.ItemGroups.FindAsync(itemGroupId);
+            if (itemGroup == null)
+
+                throw new ItemGroupNotFound(itemGroupId);
+            // Cập nhật tất cả các Item thuộc ItemGroup này: đặt ItemGroupID thành null
+            var items = await _context.Items.Where(i => i.ItemGroupID == itemGroupId).ToListAsync();
+            foreach (var item in items)
+            {
+                item.ItemGroupID = null;
+                _context.Items.Update(item);
+            }
+
+            // Xóa ItemGroup
+            _context.ItemGroups.Remove(itemGroup);
+
+            await _context.SaveChangesAsync();
         }
+
 
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
         }
-
+        
     }
 }
