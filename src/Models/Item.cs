@@ -10,8 +10,8 @@ namespace src.Models;
         public Guid ItemID { get; set; }
         
         [ForeignKey("ItemGroup")]
-        public Guid ItemGroupID { get; set; }
-        public ItemGroup ItemGroup { get; set; }
+        public Guid? ItemGroupID { get; set; }
+        public ItemGroup? ItemGroup { get; set; }
 
         [Required]
         public string ItemName { get; set; } = string.Empty;

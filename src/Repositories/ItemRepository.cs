@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using src.Data;
 using src.Dto.Item;
+using src.Exceptions.Item;
+using src.Exceptions.ItemGroup;
+using src.Exceptions.Manufacturer;
 using src.Interfaces;
 using src.Models;
 using System;
@@ -19,10 +22,114 @@ namespace src.Repositories
             _context = context;
         }
 
-        public async Task AddAsync(Item entity)
+        public async Task<ItemDto> AddAsync(ItemCreateDto entity)
         {
-            // Thêm entity vào context, commit sẽ được gọi sau qua SaveChangesAsync
-            await _context.Items.AddAsync(entity);
+            var newItem = new Item {
+                ItemID = Guid.NewGuid(),
+                ItemGroupID = entity.ItemGroupId,
+                ItemName = entity.ItemName,
+                Description = entity.Description,
+                Picture = entity.Picture,
+                ReleaseDate = entity.ReleaseDate,
+                ManufacturerID = entity.ManufacturerId
+            };
+            await _context.Items.AddAsync(newItem);
+            return new ItemDto
+            {
+                ItemID = newItem.ItemID,
+                ItemGroupID = newItem.ItemGroupID,
+                ItemName = newItem.ItemName,
+                Description = newItem.Description,
+                Picture = newItem.Picture,
+                ReleaseDate = newItem.ReleaseDate,
+                ManufacturerID = newItem.ManufacturerID
+            };
+        }
+
+        public async Task<ItemDto> AddItemToItemGroup(Guid ItemId, Guid ItemGroupId)
+        {
+            var item = await _context.Items.FirstOrDefaultAsync(i => i.ItemID == ItemId);
+            if (item == null)
+                throw new ItemNotFound(ItemId);
+            var itemGroup = await _context.ItemGroups.FirstOrDefaultAsync(ig => ig.ItemGroupID == ItemGroupId);
+            if (itemGroup == null)
+                throw new ItemGroupNotFound(ItemGroupId);
+            if (item.ItemGroupID != null)
+                throw new ItemAlreadyInGroup(item.ItemID, item.ItemGroupID.Value);
+            item.ItemGroupID = ItemGroupId;
+            return new ItemDto
+            {
+                ItemID = item.ItemID,
+                ItemGroupID = item.ItemGroupID.Value,
+                ItemName = item.ItemName,
+                Description = item.Description,
+                Picture = item.Picture,
+                ReleaseDate = item.ReleaseDate,
+                ManufacturerID = item.ManufacturerID
+            };
+        }
+
+        public async Task CreateFullItem(CreateFullItemDto dto)
+        {
+            using var transaction = await _context.Database.BeginTransactionAsync();
+            try {
+                var newItem = new Item
+                {
+                    ItemID = Guid.NewGuid(),
+                    ItemGroupID = dto.Item.ItemGroupId, // có thể null
+                    ItemName = dto.Item.ItemName,
+                    Description = dto.Item.Description,
+                    Picture = dto.Item.Picture,
+                    ReleaseDate = dto.Item.ReleaseDate,
+                    ManufacturerID = dto.Item.ManufacturerId
+                };
+                _context.Items.Add(newItem);
+                var colorMapping = new Dictionary<int, Guid>();
+                foreach (var colorDto in dto.Colors)
+                {
+                    var newColorId =  Guid.NewGuid();
+                    // Lưu mapping: temp id -> newColorId
+                    colorMapping[colorDto.TempId] = newColorId;
+
+                    var color = new Color
+                    {
+                        ColorID = newColorId,
+                        Name = colorDto.Name,
+                        UrlImage = colorDto.UrlImage,
+                        ItemID = newItem.ItemID
+                    };
+                    _context.Colors.Add(color);
+                }
+                await _context.SaveChangesAsync();
+                 foreach (var variantDto in dto.Variants)
+                {
+                    if (!colorMapping.TryGetValue(variantDto.ColorTempId, out Guid realColorId))
+                    {
+                        throw new Exception($"Không tìm thấy mapping cho Color với TempId {variantDto.ColorTempId}");
+                    }
+
+                    var variant = new Variant
+                    {
+                        VariantID = Guid.NewGuid(),
+                        ItemID = newItem.ItemID,
+                        ColorID = realColorId,
+                        Storage = variantDto.Storage,
+                        CostPrice = variantDto.CostPrice,
+                        SellingPrice = variantDto.SellingPrice,
+                        StockQuantity = variantDto.StockQuantity
+                    };
+                    _context.Variants.Add(variant);
+                }
+                await _context.SaveChangesAsync();
+
+                await transaction.CommitAsync();
+            }
+            catch (Exception)
+            {
+                await transaction.RollbackAsync();
+                throw;
+            }
+
         }
 
         public void Delete(Item entity)
@@ -91,10 +198,29 @@ namespace src.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public void Update(Item entity)
+        public void Update(UpdateItemDto entity)
         {
-            // Cập nhật entity trong context
-            _context.Items.Update(entity);
+            // Tìm item theo id
+            var item = _context.Items.Find(entity.ItemId);
+            if (item == null)
+                throw new ItemNotFound(entity.ItemId);
+            var manufacturer = _context.Manufacturers.Find(entity.ManufacturerId);
+            if (manufacturer == null)
+                throw new ManufacturerNotFound(entity.ManufacturerId);
+            if (entity.ItemGroupId != null)
+            {
+                var itemGroup = _context.ItemGroups.Find(entity.ItemGroupId);
+                if (itemGroup == null)
+                    throw new ItemGroupNotFound(entity.ItemGroupId.Value);
+            }
+            // Cập nhật thông tin mới
+            item.ItemName = entity.ItemName;
+            item.ItemGroupID = entity.ItemGroupId;
+            item.Description = entity.Description;
+            item.Picture = entity.Picture;
+            item.ReleaseDate = entity.ReleaseDate;
+            item.ManufacturerID = entity.ManufacturerId;
+            _context.Items.Update(item);
         }
     }
 }

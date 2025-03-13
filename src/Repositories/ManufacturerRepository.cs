@@ -16,6 +16,17 @@ namespace src.Repositories
             _context = context;
         }
 
+        public async Task<IEnumerable<ManufacturerDto>> GetAllAsync()
+        {
+            var manufacturers = _context.Manufacturers.Select(m => new ManufacturerDto{
+                ManufacturerID = m.ManufacturerID,
+                ManufacturerName = m.ManufacturerName,
+                Description = m.Description
+            }
+            );
+            return await manufacturers.ToListAsync();
+        }
+
         public async Task<ManufacturerDto> GetByIdAsync(Guid id)
         {
             var manufacturer = await _context.Manufacturers.FindAsync(id);

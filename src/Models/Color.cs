@@ -16,5 +16,5 @@ namespace src.Models;
         public Item Item { get; set; }
         
         // URL hình ảnh thể hiện màu sắc của item
-        public string UrlImage { get; set; } = string.Empty;
+        public string? UrlImage { get; set; } = string.Empty;
     }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using src.Data;
@@ -11,9 +12,11 @@ using src.Data;
 namespace src.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250313042320_itemGroupIdInItemNotRequired")]
+    partial class itemGroupIdInItemNotRequired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,6 +39,7 @@ namespace src.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("UrlImage")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("ColorID");
@@ -89,34 +93,6 @@ namespace src.Migrations
                     b.HasIndex("VariantID");
 
                     b.ToTable("Inventory");
-                });
-
-            modelBuilder.Entity("src.Models.InventoryTransaction", b =>
-                {
-                    b.Property<Guid>("TransactionID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("InvoiceDetailID")
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("TransactionDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("TransactionType")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("VariantID")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("TransactionID");
-
-                    b.HasIndex("VariantID");
-
-                    b.ToTable("InventoryTransactions");
                 });
 
             modelBuilder.Entity("src.Models.Invoice", b =>
@@ -280,17 +256,6 @@ namespace src.Migrations
                 });
 
             modelBuilder.Entity("src.Models.Inventory", b =>
-                {
-                    b.HasOne("src.Models.Variant", "Variant")
-                        .WithMany()
-                        .HasForeignKey("VariantID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Variant");
-                });
-
-            modelBuilder.Entity("src.Models.InventoryTransaction", b =>
                 {
                     b.HasOne("src.Models.Variant", "Variant")
                         .WithMany()

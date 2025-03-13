@@ -4,6 +4,7 @@ using src.Interfaces;
 using src.Utils;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace src.Controllers
@@ -41,6 +42,43 @@ namespace src.Controllers
         {
             var itemDtos = await _itemRepository.GetItemByItemGroupId(ItemGroupId);
             return Ok(new Response<IEnumerable<ItemDto>>(itemDtos));
+        }
+        [HttpPost("Create")]
+        public async Task<IActionResult> CreateNewItem([FromBody] ItemCreateDto item)
+        {
+            var newItemResult = await _itemRepository.AddAsync(item);
+            await _itemRepository.SaveChangesAsync();
+            return Ok(new Response<ItemDto>(new ItemDto
+            {
+                ItemID = newItemResult.ItemID,
+                ItemGroupID = newItemResult.ItemGroupID,
+                ItemName = newItemResult.ItemName,
+                Description = newItemResult.Description,
+                Picture = newItemResult.Picture,
+                ReleaseDate = newItemResult.ReleaseDate,
+                ManufacturerID = newItemResult.ManufacturerID
+            }, "Item created successfully", true));
+        }
+        [HttpPost("{itemId}/AddToItemGroup")]
+        public async Task<IActionResult> AddItemToItemGroup(Guid itemId, [FromBody] AddItemToGroupDto addItemToGroupDto)
+        {
+            var newItemResult = await _itemRepository.AddItemToItemGroup(itemId, addItemToGroupDto.ItemGroupId);
+            await _itemRepository.SaveChangesAsync();
+            return Ok(new Response<ItemDto>(newItemResult, "Item added to ItemGroup successfully", true));
+        }
+        [HttpPost("CreateFullItem")]
+        public async Task<IActionResult> CreateFullItem([FromBody] CreateFullItemDto entity)
+        {
+            await _itemRepository.CreateFullItem(entity);
+            await _itemRepository.SaveChangesAsync();
+            return Ok(new Response<object>(null, "Full Item created successfully", true));
+        }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateItem([FromBody] UpdateItemDto item)
+        {
+            _itemRepository.Update(item);
+            await _itemRepository.SaveChangesAsync();
+            return Ok(new Response<UpdateItemDto>(item, "Item updated successfully", true));
         }
     }
 }

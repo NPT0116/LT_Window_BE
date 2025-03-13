@@ -27,5 +27,19 @@ namespace src.Controllers
                 return NotFound(new Response<object>(null, "Variant not found", false));
             return Ok(new Response<List<VariantDto>>(variantDto));
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetVariantById(Guid id)
+        {
+            var variantDto = await _variantRepository.GetVariantByIdAsync(id);
+            if (variantDto == null)
+                return NotFound(new Response<object>(null, "Variant not found", false));
+            return Ok(new Response<VariantDto>(variantDto));
+        }
+        [HttpPut]
+        public async Task<IActionResult> UpdateVariant([FromBody] UpdateVariantDto variantDto)
+        {
+                var updatedVariant = await _variantRepository.UpdateVariantAsync(variantDto);
+                return Ok(new Response<VariantDto>(updatedVariant));
+        }
     }
 }
