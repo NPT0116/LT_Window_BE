@@ -3,6 +3,7 @@ using src.Data;
 using src.Dto.Item;
 using src.Exceptions.Item;
 using src.Exceptions.ItemGroup;
+using src.Exceptions.Manufacturer;
 using src.Interfaces;
 using src.Models;
 using System;
@@ -197,10 +198,29 @@ namespace src.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public void Update(Item entity)
+        public void Update(UpdateItemDto entity)
         {
-            // Cập nhật entity trong context
-            _context.Items.Update(entity);
+            // Tìm item theo id
+            var item = _context.Items.Find(entity.ItemId);
+            if (item == null)
+                throw new ItemNotFound(entity.ItemId);
+            var manufacturer = _context.Manufacturers.Find(entity.ManufacturerId);
+            if (manufacturer == null)
+                throw new ManufacturerNotFound(entity.ManufacturerId);
+            if (entity.ItemGroupId != null)
+            {
+                var itemGroup = _context.ItemGroups.Find(entity.ItemGroupId);
+                if (itemGroup == null)
+                    throw new ItemGroupNotFound(entity.ItemGroupId.Value);
+            }
+            // Cập nhật thông tin mới
+            item.ItemName = entity.ItemName;
+            item.ItemGroupID = entity.ItemGroupId;
+            item.Description = entity.Description;
+            item.Picture = entity.Picture;
+            item.ReleaseDate = entity.ReleaseDate;
+            item.ManufacturerID = entity.ManufacturerId;
+            _context.Items.Update(item);
         }
     }
 }

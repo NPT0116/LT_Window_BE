@@ -13,7 +13,7 @@ public interface IItemRepository
     Task<ItemDto> AddItemToItemGroup(Guid ItemId, Guid ItemGroupId);
     Task CreateFullItem(CreateFullItemDto entity);
     Task<ItemDto> AddAsync(ItemCreateDto entity);
-    void Update(Item entity);
+    void Update(UpdateItemDto entity);
     void Delete(Item entity);
     Task SaveChangesAsync();
 }

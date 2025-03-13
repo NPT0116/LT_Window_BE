@@ -73,5 +73,12 @@ namespace src.Controllers
             await _itemRepository.SaveChangesAsync();
             return Ok(new Response<object>(null, "Full Item created successfully", true));
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateItem([FromBody] UpdateItemDto item)
+        {
+            _itemRepository.Update(item);
+            await _itemRepository.SaveChangesAsync();
+            return Ok(new Response<UpdateItemDto>(item, "Item updated successfully", true));
+        }
     }
 }
