@@ -4,6 +4,8 @@ using src.Dto.Variant;
 using src.Interfaces;
 using src.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace src.Repositories
@@ -17,24 +19,23 @@ namespace src.Repositories
             _context = context;
         }
 
-        public async Task<VariantDto> GetVariantByItemIdAsync(Guid id)
+        // Nếu bạn cập nhật interface để trả về ICollection<VariantDto>
+        public async Task<List<VariantDto>> GetVariantByItemIdAsync(Guid id)
         {
-            // Tìm variant theo ItemID (ở đây giả sử chỉ lấy variant đầu tiên nếu có nhiều)
-            var variant = await _context.Variants.FirstOrDefaultAsync(v => v.ItemID == id);
-            if (variant == null)
-                return null;
+            var variants = await _context.Variants
+                .Where(v => v.ItemID == id)
+                .ToListAsync();
 
-            // Chuyển đổi entity Variant sang DTO VariantDto
-            return new VariantDto
+            return variants.Select(v => new VariantDto
             {
-                VariantID = variant.VariantID,
-                ItemID = variant.ItemID,
-                ColorID = variant.ColorID,
-                Storage = variant.Storage,
-                CostPrice = variant.CostPrice,
-                SellingPrice = variant.SellingPrice,
-                StockQuantity = variant.StockQuantity
-            };
+                VariantID = v.VariantID,
+                ItemID = v.ItemID,
+                ColorID = v.ColorID,
+                Storage = v.Storage,
+                CostPrice = v.CostPrice,
+                SellingPrice = v.SellingPrice,
+                StockQuantity = v.StockQuantity
+            }).ToList();
         }
     }
 }
