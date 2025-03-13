@@ -7,7 +7,7 @@ public class ItemDto
 
         public Guid ItemID { get; set; }
         
-        public Guid ItemGroupID { get; set; }
+        public Guid? ItemGroupID { get; set; }
         public string ItemName { get; set; } = string.Empty;
         
         public string? Description { get; set; }

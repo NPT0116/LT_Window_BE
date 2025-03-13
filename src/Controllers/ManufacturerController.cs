@@ -27,5 +27,11 @@ namespace src.Controllers
                 return NotFound(new Response<object>(null, "Manufacturer not found", false));
             return Ok(new Response<ManufacturerDto>(manufacturerDto));
         }
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var manufacturerDtos = await _manufacturerRepository.GetAllAsync();
+            return Ok(new Response<IEnumerable<ManufacturerDto>>(manufacturerDtos));
+        }
     }
 }

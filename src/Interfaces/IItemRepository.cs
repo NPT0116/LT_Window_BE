@@ -10,7 +10,8 @@ public interface IItemRepository
     Task<IEnumerable<ItemDto>> GetAllAsync();
     Task<IEnumerable<ItemDto>> GetItemByItemGroupId(Guid ItemGroupId);
     
-    Task AddAsync(Item entity);
+    Task<ItemDto> AddItemToItemGroup(Guid ItemId, Guid ItemGroupId);
+    Task<ItemDto> AddAsync(ItemCreateDto entity);
     void Update(Item entity);
     void Delete(Item entity);
     Task SaveChangesAsync();

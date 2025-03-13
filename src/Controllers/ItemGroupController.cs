@@ -37,5 +37,17 @@ namespace src.Controllers
             var itemGroupDtos = await _itemGroupRepository.GetAllAsync();
             return Ok(new Response<IEnumerable<ItemGroupDto>>(itemGroupDtos));
         }
+        [HttpPost("Create")]
+        public async Task<IActionResult> Create(ItemGroupCreateDto itemGroup)
+        {
+            var itemGroupCreate = new ItemGroup
+            {
+                ItemGroupID = Guid.NewGuid(),
+                ItemGroupName = itemGroup.ItemGroupName
+            };
+            await _itemGroupRepository.AddAsync(itemGroupCreate);
+            await _itemGroupRepository.SaveChangesAsync();
+            return Ok(new Response<ItemGroupDto>(new ItemGroupDto{ ItemGroupID = itemGroupCreate.ItemGroupID, ItemGroupName=itemGroupCreate.ItemGroupName}, "ItemGroup created successfully", true));
+        }
     }
 }

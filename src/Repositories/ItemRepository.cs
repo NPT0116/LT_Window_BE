@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using src.Data;
 using src.Dto.Item;
+using src.Exceptions.Item;
+using src.Exceptions.ItemGroup;
 using src.Interfaces;
 using src.Models;
 using System;
@@ -19,10 +21,51 @@ namespace src.Repositories
             _context = context;
         }
 
-        public async Task AddAsync(Item entity)
+        public async Task<ItemDto> AddAsync(ItemCreateDto entity)
         {
-            // Thêm entity vào context, commit sẽ được gọi sau qua SaveChangesAsync
-            await _context.Items.AddAsync(entity);
+            var newItem = new Item {
+                ItemID = Guid.NewGuid(),
+                ItemGroupID = entity.ItemGroupId,
+                ItemName = entity.ItemName,
+                Description = entity.Description,
+                Picture = entity.Picture,
+                ReleaseDate = entity.ReleaseDate,
+                ManufacturerID = entity.ManufacturerId
+            };
+            await _context.Items.AddAsync(newItem);
+            return new ItemDto
+            {
+                ItemID = newItem.ItemID,
+                ItemGroupID = newItem.ItemGroupID,
+                ItemName = newItem.ItemName,
+                Description = newItem.Description,
+                Picture = newItem.Picture,
+                ReleaseDate = newItem.ReleaseDate,
+                ManufacturerID = newItem.ManufacturerID
+            };
+        }
+
+        public async Task<ItemDto> AddItemToItemGroup(Guid ItemId, Guid ItemGroupId)
+        {
+            var item = await _context.Items.FirstOrDefaultAsync(i => i.ItemID == ItemId);
+            if (item == null)
+                throw new ItemNotFound(ItemId);
+            var itemGroup = await _context.ItemGroups.FirstOrDefaultAsync(ig => ig.ItemGroupID == ItemGroupId);
+            if (itemGroup == null)
+                throw new ItemGroupNotFound(ItemGroupId);
+            if (item.ItemGroupID != null)
+                throw new ItemAlreadyInGroup(item.ItemID, item.ItemGroupID.Value);
+            item.ItemGroupID = ItemGroupId;
+            return new ItemDto
+            {
+                ItemID = item.ItemID,
+                ItemGroupID = item.ItemGroupID.Value,
+                ItemName = item.ItemName,
+                Description = item.Description,
+                Picture = item.Picture,
+                ReleaseDate = item.ReleaseDate,
+                ManufacturerID = item.ManufacturerID
+            };
         }
 
         public void Delete(Item entity)
