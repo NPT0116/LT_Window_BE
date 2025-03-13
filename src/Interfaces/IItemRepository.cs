@@ -11,6 +11,7 @@ public interface IItemRepository
     Task<IEnumerable<ItemDto>> GetItemByItemGroupId(Guid ItemGroupId);
     
     Task<ItemDto> AddItemToItemGroup(Guid ItemId, Guid ItemGroupId);
+    Task CreateFullItem(CreateFullItemDto entity);
     Task<ItemDto> AddAsync(ItemCreateDto entity);
     void Update(Item entity);
     void Delete(Item entity);

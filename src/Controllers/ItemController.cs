@@ -66,5 +66,12 @@ namespace src.Controllers
             await _itemRepository.SaveChangesAsync();
             return Ok(new Response<ItemDto>(newItemResult, "Item added to ItemGroup successfully", true));
         }
+        [HttpPost("CreateFullItem")]
+        public async Task<IActionResult> CreateFullItem([FromBody] CreateFullItemDto entity)
+        {
+            await _itemRepository.CreateFullItem(entity);
+            await _itemRepository.SaveChangesAsync();
+            return Ok(new Response<object>(null, "Full Item created successfully", true));
+        }
     }
 }
