@@ -39,9 +39,11 @@ namespace src.Controllers
             return Ok(new Response<VariantDto>(variantDto));
         }
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateVariant([FromBody] UpdateVariantDto variantDto)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateVariant([FromBody] UpdateVariantDto variantDto, [FromRoute] Guid id)
         {
+            if (id != variantDto.VariantID)
+                return BadRequest(new Response<object>(null, "Id mismatch", false));
             var updatedVariant = await _variantRepository.UpdateVariantAsync(variantDto);
             return Ok(new Response<VariantDto>(updatedVariant));
         }

@@ -27,5 +27,11 @@ namespace src.Controllers
                 return NotFound(new Response<object>(null, "Color not found", false));
             return Ok(new Response<ColorDto>(colorDto));
         }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromBody] UpdateColorDto colorDto, [FromRoute] Guid id)
+        {
+            var updatedColor = await _colorRepository.UpdateAsync(id, colorDto);
+            return Ok(new Response<ColorDto>(updatedColor));
+        }
     }
 }
