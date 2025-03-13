@@ -33,5 +33,11 @@ namespace src.Controllers
             var manufacturerDtos = await _manufacturerRepository.GetAllAsync();
             return Ok(new Response<IEnumerable<ManufacturerDto>>(manufacturerDtos));
         }
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateManufacturerDto manufacturerDto)
+        {
+            var createdManufacturer = await _manufacturerRepository.CreateAsync(manufacturerDto);
+            return CreatedAtAction(nameof(GetById), new { id = createdManufacturer.ManufacturerID }, new Response<ManufacturerDto>(createdManufacturer));
+        }
     }
 }

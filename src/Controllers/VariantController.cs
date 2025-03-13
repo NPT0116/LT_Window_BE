@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using src.Dto.Variant;
 using src.Interfaces;
+using src.Query;
 using src.Utils;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace src.Controllers
@@ -27,6 +29,7 @@ namespace src.Controllers
                 return NotFound(new Response<object>(null, "Variant not found", false));
             return Ok(new Response<List<VariantDto>>(variantDto));
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVariantById(Guid id)
         {
@@ -35,11 +38,22 @@ namespace src.Controllers
                 return NotFound(new Response<object>(null, "Variant not found", false));
             return Ok(new Response<VariantDto>(variantDto));
         }
-        [HttpPut]
-        public async Task<IActionResult> UpdateVariant([FromBody] UpdateVariantDto variantDto)
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateVariant([FromBody] UpdateVariantDto variantDto, [FromRoute] Guid id)
         {
-                var updatedVariant = await _variantRepository.UpdateVariantAsync(variantDto);
-                return Ok(new Response<VariantDto>(updatedVariant));
+            if (id != variantDto.VariantID)
+                return BadRequest(new Response<object>(null, "Id mismatch", false));
+            var updatedVariant = await _variantRepository.UpdateVariantAsync(variantDto);
+            return Ok(new Response<VariantDto>(updatedVariant));
+        }
+
+        // GET: api/Variant/GetAll?PageNumber=1&PageSize=10&Search=128GB&StorageFilter=128GB&ManufacturerFilter=Apple&SortBy=sellingprice&SortDirection=desc
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll([FromQuery] VariantQueryParameters queryParameters)
+        {
+            var pagedResponse = await _variantRepository.GetAllVariantsAsync(queryParameters);
+            return Ok(pagedResponse);
         }
     }
 }
