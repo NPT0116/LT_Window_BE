@@ -8,7 +8,7 @@ namespace src.Models;
         [Key]
         public Guid CustomerID { get; set; }
 
-        [Required]
+    [Required]
         public string Name { get; set; } = string.Empty;
 
         public string? Email { get; set; }
