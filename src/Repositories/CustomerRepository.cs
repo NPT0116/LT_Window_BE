@@ -56,12 +56,75 @@ namespace src.Repositories
             };
         }
 
+    public async  Task<ICollection<CustomerDto>> GetAllCustomersAsync()
+        {
+            return await _context.Customers.Select(c => new CustomerDto
+            {
+                CustomerID = c.CustomerID,
+                Name = c.Name,
+                Email = c.Email,
+                Phone = c.Phone,
+                Address = c.Address
+            }).ToListAsync();
+        }
+
+        public async Task<CustomerDto> GetCustomerByEmailAsync(string email)
+        {
+            var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Email == email);
+            if (customer == null)
+                throw new CustomerEmailNotFound(email);
+            return new CustomerDto
+            {
+                CustomerID = customer.CustomerID,
+                Name = customer.Name,
+                Email = customer.Email,
+                Phone = customer.Phone,
+                Address = customer.Address
+            };
+        }
+
         // Phương thức truy xuất khách hàng theo ID (nếu cần)
         public async Task<CustomerDto> GetCustomerByIdAsync(Guid customerId)
         {
             var customer = await _context.Customers.FindAsync(customerId);
             if (customer == null)
                 throw new CustomerNotFound(customerId);
+            return new CustomerDto
+            {
+                CustomerID = customer.CustomerID,
+                Name = customer.Name,
+                Email = customer.Email,
+                Phone = customer.Phone,
+                Address = customer.Address
+            };
+        }
+
+        public async Task<CustomerDto> GetCustomerByPhoneAsync(string phone)
+        {
+            var customer = await _context.Customers.FirstOrDefaultAsync(c => c.Phone == phone);
+            if (customer == null)
+                throw new CustomerEmailNotFound(phone);
+            return new CustomerDto
+            {
+                CustomerID = customer.CustomerID,
+                Name = customer.Name,
+                Email = customer.Email,
+                Phone = customer.Phone,
+                Address = customer.Address
+            };
+        }
+
+        public async Task<CustomerDto> UpdateCustomerAsync(Guid customerId, UpdateCustomerDto customerDto)
+        {
+            var customer = _context.Customers.Find(customerId);
+            if (customer == null)
+                throw new CustomerNotFound(customerId);
+            customer.Name = customerDto.Name;
+            customer.Email = customerDto.Email;
+            customer.Phone = customerDto.Phone;
+            customer.Address = customerDto.Address;
+            _context.Customers.Update(customer);
+            await _context.SaveChangesAsync();
             return new CustomerDto
             {
                 CustomerID = customer.CustomerID,

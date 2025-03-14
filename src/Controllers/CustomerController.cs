@@ -27,6 +27,29 @@ namespace src.Controllers
             var customer = await _customerRepository.CreateQuickCustomerAsync(customerDto);
             return Ok(new Response<CustomerDto>(customer));
         }
-        
+        [HttpGet("Phone/{phone}")]
+        public async Task<IActionResult> GetCustomerByPhone(string phone)
+        {
+            var customer = await _customerRepository.GetCustomerByPhoneAsync(phone);
+            return Ok(new Response<CustomerDto>(customer));
+        }
+        [HttpGet("Email/{email}")]
+        public async Task<IActionResult> GetCustomerByEmail(string email)
+        {
+            var customer = await _customerRepository.GetCustomerByEmailAsync(email);
+            return Ok(new Response<CustomerDto>(customer));
+        }
+        [HttpPut("{customerId}")]
+        public async Task<IActionResult> UpdateCustomer(Guid customerId, [FromBody] UpdateCustomerDto customerDto)
+        {
+            var customer = await _customerRepository.UpdateCustomerAsync(customerId, customerDto);
+            return Ok(new Response<CustomerDto>(customer));
+        }
+        [HttpGet("All")]
+        public async Task<IActionResult> GetAllCustomers()
+        {
+            var customers = await _customerRepository.GetAllCustomersAsync();
+            return Ok(new Response<ICollection<CustomerDto>>(customers));
+        }
     }
 }
