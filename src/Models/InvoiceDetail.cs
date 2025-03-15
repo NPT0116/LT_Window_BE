@@ -19,4 +19,7 @@ namespace src.Models;
 
         public int Quantity { get; set; }
         public float Price { get; set; }
+
+        public InventoryTransaction? InventoryTransaction { get; set; }
+
     }

@@ -321,5 +321,127 @@
         }
       ]
     }
+  ],
+  "InventoryTransactions": [
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000111001",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-15T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000011001"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000111002",
+      "VariantID": "00000000-0000-0000-0000-000000001002",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-16T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000011002"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000111003",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-17T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000011003"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000111004",
+      "VariantID": "00000000-0000-0000-0000-000000001002",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-18T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000011004"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000111005",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-19T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000011005"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000121001",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-15T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000021001"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000121002",
+      "VariantID": "00000000-0000-0000-0000-000000001002",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-16T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000021002"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000121003",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-17T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000021003"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000121004",
+      "VariantID": "00000000-0000-0000-0000-000000001002",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-18T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000021004"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000121005",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-19T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000021005"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000131001",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-15T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000031001"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000131002",
+      "VariantID": "00000000-0000-0000-0000-000000001002",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-16T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000031002"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000131003",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-17T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000031003"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000131004",
+      "VariantID": "00000000-0000-0000-0000-000000001002",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-18T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000031004"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000131005",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-19T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000031005"
+    }
   ]
 }
