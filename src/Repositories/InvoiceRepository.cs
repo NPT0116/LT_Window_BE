@@ -9,6 +9,7 @@ using src.Exceptions.Invoice;
 using src.Exceptions.Variant;
 using src.Interfaces;
 using src.Models;
+using src.Query;
 
 namespace src.Repositories;
 
@@ -148,10 +149,32 @@ public async Task<InvoiceDto> CreateInvoiceAsync(CreateInvoiceDto invoiceDto)
 
 
 
-    public async Task<IEnumerable<InvoiceDto>> GetAllInvoicesAsync()
+    public async Task<IEnumerable<InvoiceDto>> GetAllInvoicesAsync(InvoiceQueryParameter queryInvoiceParameter)
     {
-        var invoices = await _context.Invoices.Include(i => i.InvoiceDetails).ToListAsync();
-        var invoiceDtos = invoices.Select(i => new InvoiceDto
+        var invoices =  _context.Invoices.Include(i => i.InvoiceDetails).AsQueryable();
+        if (queryInvoiceParameter.invoiceDatetimeQueryParameter != null)
+        {
+            invoices = invoices.Where(i => i.Date >= queryInvoiceParameter.invoiceDatetimeQueryParameter.FromDate && i.Date <= queryInvoiceParameter.invoiceDatetimeQueryParameter.ToDate);
+            if (queryInvoiceParameter.invoiceDatetimeQueryParameter.sortDirection == "desc")
+            {
+                invoices = invoices.OrderByDescending(i => i.Date);
+            }
+            else
+            {
+                invoices = invoices.OrderBy(i => i.Date);
+            }
+        }
+        if (!string.IsNullOrWhiteSpace(queryInvoiceParameter.CustomerName))
+        {
+            invoices = invoices.Where(i => i.Customer.Name.Contains(queryInvoiceParameter.CustomerName));
+        }
+        if (!string.IsNullOrWhiteSpace(queryInvoiceParameter.CustomerPhone))
+        {
+            invoices = invoices.Where(i => i.Customer.Phone.Contains(queryInvoiceParameter.CustomerPhone));
+        }
+
+        var finalResponse = await invoices.ToListAsync();
+        var invoiceDtos = finalResponse.Select(i => new InvoiceDto
         {
             InvoiceID = i.InvoiceID,
             CustomerID = i.CustomerID,
@@ -167,6 +190,7 @@ public async Task<InvoiceDto> CreateInvoiceAsync(CreateInvoiceDto invoiceDto)
         });
         return invoiceDtos;
     }
+
 
     public async Task<InvoiceDto> GetInvoiceByIdAsync(Guid invoiceId)
     {

@@ -1,15 +1,19 @@
 using System;
+using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using src.Data;
 using src.Models;
 
-namespace src.Services;
-
-public class SeedData
+namespace src.Services
 {
-    public List<Manufacturer> Manufacturers { get; set; } = new List<Manufacturer>();
-    public List<ItemGroup> ItemGroups { get; set; } = new List<ItemGroup>();
-}
+    // Lớp chứa cấu trúc dữ liệu seed được định nghĩa trong file seed.json
+    public class SeedData
+    {
+        public List<Manufacturer> Manufacturers { get; set; } = new List<Manufacturer>();
+        public List<ItemGroup> ItemGroups { get; set; } = new List<ItemGroup>();
+        public List<Customer> Customers { get; set; } = new List<Customer>();
+    }
 
     public class SeedService
     {
@@ -21,92 +25,48 @@ public class SeedData
             _context = context;
             _env = env;
         }
-public async Task SeedAsync()
-{
-    // Seed Manufacturers nếu chưa có
-    if (!_context.Manufacturers.Any())
-    {
-        var seedFile = Path.Combine(_env.ContentRootPath, "seed.json");
-        if (File.Exists(seedFile))
-        {
-            var json = await File.ReadAllTextAsync(seedFile);
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            var seedData = JsonSerializer.Deserialize<SeedData>(json, options);
-            if (seedData != null && seedData.Manufacturers != null)
-            {
-                foreach (var m in seedData.Manufacturers)
-                {
-                    // Thêm kiểm tra nếu cần: ví dụ, kiểm tra xem manufacturer có tồn tại không
-                    _context.Manufacturers.Add(m);
-                }
-                await _context.SaveChangesAsync();
-            }
-        }
-    }
-    
-    // Seed ItemGroups (và Items) nếu chưa có
-    if (!_context.ItemGroups.Any())
-    {
-        var seedFile = Path.Combine(_env.ContentRootPath, "seed.json");
-        if (File.Exists(seedFile))
-        {
-            var json = await File.ReadAllTextAsync(seedFile);
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            var seedData = JsonSerializer.Deserialize<SeedData>(json, options);
-            if (seedData != null)
-            {
-                foreach (var group in seedData.ItemGroups)
-                {
-                    if (group.ItemGroupID == Guid.Empty)
-                        group.ItemGroupID = Guid.NewGuid();
-                    
-                    foreach (var item in group.Items)
-                    {
-                        if (item.ItemID == Guid.Empty)
-                            item.ItemID = Guid.NewGuid();
 
-                        // Chuyển đổi ReleaseDate sang UTC nếu cần
-                        if (item.ReleaseDate.Kind != DateTimeKind.Utc)
-                        {
-                            item.ReleaseDate = DateTime.SpecifyKind(item.ReleaseDate, DateTimeKind.Utc);
-                        }
-                        
-                        // Nếu ManufacturerID là Guid.Empty, bạn có thể gán mặc định cho nó
-                        // Nhưng nếu đã có trong file seed.json, hãy đảm bảo nó trùng với manufacturer "Apple"
-                        if (item.ManufacturerID == Guid.Empty)
-                        {
-                            // Gán ManufacturerID của "Apple" đã seed, ví dụ:
-                            item.ManufacturerID = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
-                        }
-                        
-                        // Gán ItemID cho các Color của item
-                        if (item.Colors != null)
-                        {
-                            foreach (var color in item.Colors)
-                            {
-                                color.ItemID = item.ItemID;
-                            }
-                        }
-                        
-                        // Gán ItemID cho các Variant của item
-                        if (item.Variants != null)
-                        {
-                            foreach (var variant in item.Variants)
-                            {
-                                variant.ItemID = item.ItemID;
-                            }
-                        }
-                    }
-                    _context.ItemGroups.Add(group);
-                }
-                await _context.SaveChangesAsync();
+        public async Task SeedAsync()
+        {
+            // Xác định đường dẫn tới file seed.json
+            var seedFile = Path.Combine(_env.ContentRootPath, "seed.json");
+            if (!File.Exists(seedFile))
+            {
+                // Nếu không tìm thấy file, có thể log thông báo và thoát
+                Console.WriteLine("Seed file not found: " + seedFile);
+                return;
             }
+
+            // Đọc nội dung file seed.json
+            var json = await File.ReadAllTextAsync(seedFile);
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var seedData = JsonSerializer.Deserialize<SeedData>(json, options);
+
+            if (seedData == null)
+            {
+                Console.WriteLine("Không thể parse dữ liệu seed từ file JSON.");
+                return;
+            }
+
+            // Seed Manufacturers nếu bảng rỗng
+            if (!_context.Manufacturers.Any())
+            {
+                _context.Manufacturers.AddRange(seedData.Manufacturers);
+            }
+
+            // Seed ItemGroups (bao gồm Items, Colors, Variants) nếu bảng rỗng
+            if (!_context.ItemGroups.Any())
+            {
+                _context.ItemGroups.AddRange(seedData.ItemGroups);
+            }
+
+            // Seed Customers (bao gồm Invoices và InvoiceDetails) nếu bảng rỗng
+            if (!_context.Customers.Any())
+            {
+                _context.Customers.AddRange(seedData.Customers);
+            }
+
+            await _context.SaveChangesAsync();
         }
     }
 }
-
-    
-    
-
-
-    }
