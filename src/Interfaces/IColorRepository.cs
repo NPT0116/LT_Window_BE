@@ -7,4 +7,5 @@ public interface IColorRepository
 {
     Task<ColorDto> GetByIdAsync(Guid id);
     Task<ColorDto> UpdateAsync(Guid id, UpdateColorDto colorDto);
+    Task<string> GetImageByVariantIdAsync(Guid variantId);
 }
