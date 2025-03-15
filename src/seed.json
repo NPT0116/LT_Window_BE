@@ -8,38 +8,34 @@
   ],
   "ItemGroups": [
     {
+      "ItemGroupID": "00000000-0000-0000-0000-000000000100",
       "ItemGroupName": "iphone 16 series",
       "Items": [
         {
+          "ItemID": "00000000-0000-0000-0000-000000000101",
           "ItemName": "iphone 16 pro",
           "Description": "Premium version of iPhone 16",
           "Picture": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-max-titan-trang.png",
-          "ReleaseDate": "2025-03-15T00:00:00",
+          "ReleaseDate": "2025-03-15T00:00:00Z",
           "ManufacturerID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
           "Colors": [
             {
               "ColorID": "11111111-1111-1111-1111-111111111111",
               "Name": "titan trắng",
-              "UrlImage": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-max-titan-trang.png"
+              "UrlImage": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-max-titan-trang.png",
+              "ItemID": "00000000-0000-0000-0000-000000000101"
             },
             {
               "ColorID": "22222222-2222-2222-2222-222222222222",
               "Name": "titan đen",
-              "UrlImage": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-max-titan-den.png"
-            },
-            {
-              "ColorID": "33333333-3333-3333-3333-333333333333",
-              "Name": "titan tự nhiên",
-              "UrlImage": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-max-titan-tu-nhien.png"
-            },
-            {
-              "ColorID": "44444444-4444-4444-4444-444444444444",
-              "Name": "titan sa mạc",
-              "UrlImage": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-max-titan-sa-mac.png"
+              "UrlImage": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-max-titan-den.png",
+              "ItemID": "00000000-0000-0000-0000-000000000101"
             }
           ],
           "Variants": [
             {
+              "VariantID": "00000000-0000-0000-0000-000000001001",
+              "ItemID": "00000000-0000-0000-0000-000000000101",
               "ColorID": "11111111-1111-1111-1111-111111111111",
               "Storage": "128GB",
               "CostPrice": 900,
@@ -47,601 +43,405 @@
               "StockQuantity": 50
             },
             {
-              "ColorID": "11111111-1111-1111-1111-111111111111",
-              "Storage": "256GB",
-              "CostPrice": 1000,
-              "SellingPrice": 1200,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "11111111-1111-1111-1111-111111111111",
-              "Storage": "512GB",
-              "CostPrice": 1100,
-              "SellingPrice": 1300,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "11111111-1111-1111-1111-111111111111",
-              "Storage": "1024GB",
-              "CostPrice": 1300,
-              "SellingPrice": 1500,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "22222222-2222-2222-2222-222222222222",
-              "Storage": "128GB",
-              "CostPrice": 900,
-              "SellingPrice": 1100,
-              "StockQuantity": 50
-            },
-            {
+              "VariantID": "00000000-0000-0000-0000-000000001002",
+              "ItemID": "00000000-0000-0000-0000-000000000101",
               "ColorID": "22222222-2222-2222-2222-222222222222",
               "Storage": "256GB",
               "CostPrice": 1000,
               "SellingPrice": 1200,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "22222222-2222-2222-2222-222222222222",
-              "Storage": "512GB",
-              "CostPrice": 1100,
-              "SellingPrice": 1300,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "22222222-2222-2222-2222-222222222222",
-              "Storage": "1024GB",
-              "CostPrice": 1300,
-              "SellingPrice": 1500,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "33333333-3333-3333-3333-333333333333",
-              "Storage": "128GB",
-              "CostPrice": 900,
-              "SellingPrice": 1100,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "33333333-3333-3333-3333-333333333333",
-              "Storage": "256GB",
-              "CostPrice": 1000,
-              "SellingPrice": 1200,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "33333333-3333-3333-3333-333333333333",
-              "Storage": "512GB",
-              "CostPrice": 1100,
-              "SellingPrice": 1300,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "33333333-3333-3333-3333-333333333333",
-              "Storage": "1024GB",
-              "CostPrice": 1300,
-              "SellingPrice": 1500,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "44444444-4444-4444-4444-444444444444",
-              "Storage": "128GB",
-              "CostPrice": 900,
-              "SellingPrice": 1100,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "44444444-4444-4444-4444-444444444444",
-              "Storage": "256GB",
-              "CostPrice": 1000,
-              "SellingPrice": 1200,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "44444444-4444-4444-4444-444444444444",
-              "Storage": "512GB",
-              "CostPrice": 1100,
-              "SellingPrice": 1300,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "44444444-4444-4444-4444-444444444444",
-              "Storage": "1024GB",
-              "CostPrice": 1300,
-              "SellingPrice": 1500,
               "StockQuantity": 50
             }
           ]
         },
         {
+          "ItemID": "00000000-0000-0000-0000-000000000102",
           "ItemName": "iphone 16 promax",
           "Description": "Bigger screen version of iPhone 16 Pro",
           "Picture": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-max-titan-trang.png",
-          "ReleaseDate": "2025-03-15T00:00:00",
+          "ReleaseDate": "2025-03-15T00:00:00Z",
           "ManufacturerID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
           "Colors": [
             {
-              "ColorID": "55555555-5555-5555-5555-555555555555",
-              "Name": "titan trắng",
-              "UrlImage": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-max-titan-trang.png"
-            },
-            {
-              "ColorID": "66666666-6666-6666-6666-666666666666",
-              "Name": "titan đen",
-              "UrlImage": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-max-titan-den.png"
-            },
-            {
-              "ColorID": "77777777-7777-7777-7777-777777777777",
+              "ColorID": "33333333-3333-3333-3333-333333333333",
               "Name": "titan tự nhiên",
-              "UrlImage": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-max-titan-tu-nhien.png"
+              "UrlImage": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-max-titan-tu-nhien.png",
+              "ItemID": "00000000-0000-0000-0000-000000000102"
             },
             {
-              "ColorID": "88888888-8888-8888-8888-888888888888",
+              "ColorID": "44444444-4444-4444-4444-444444444444",
               "Name": "titan sa mạc",
-              "UrlImage": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-max-titan-sa-mac.png"
+              "UrlImage": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16-pro-max-titan-sa-mac.png",
+              "ItemID": "00000000-0000-0000-0000-000000000102"
             }
           ],
           "Variants": [
             {
-              "ColorID": "55555555-5555-5555-5555-555555555555",
+              "VariantID": "00000000-0000-0000-0000-000000002001",
+              "ItemID": "00000000-0000-0000-0000-000000000102",
+              "ColorID": "33333333-3333-3333-3333-333333333333",
               "Storage": "128GB",
               "CostPrice": 900,
               "SellingPrice": 1100,
               "StockQuantity": 50
             },
             {
-              "ColorID": "55555555-5555-5555-5555-555555555555",
+              "VariantID": "00000000-0000-0000-0000-000000002002",
+              "ItemID": "00000000-0000-0000-0000-000000000102",
+              "ColorID": "44444444-4444-4444-4444-444444444444",
               "Storage": "256GB",
               "CostPrice": 1000,
-              "SellingPrice": 1200,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "55555555-5555-5555-5555-555555555555",
-              "Storage": "512GB",
-              "CostPrice": 1100,
-              "SellingPrice": 1300,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "55555555-5555-5555-5555-555555555555",
-              "Storage": "1024GB",
-              "CostPrice": 1300,
-              "SellingPrice": 1500,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "66666666-6666-6666-6666-666666666666",
-              "Storage": "128GB",
-              "CostPrice": 900,
-              "SellingPrice": 1100,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "66666666-6666-6666-6666-666666666666",
-              "Storage": "256GB",
-              "CostPrice": 1000,
-              "SellingPrice": 1200,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "66666666-6666-6666-6666-666666666666",
-              "Storage": "512GB",
-              "CostPrice": 1100,
-              "SellingPrice": 1300,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "66666666-6666-6666-6666-666666666666",
-              "Storage": "1024GB",
-              "CostPrice": 1300,
-              "SellingPrice": 1500,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "77777777-7777-7777-7777-777777777777",
-              "Storage": "128GB",
-              "CostPrice": 900,
-              "SellingPrice": 1100,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "77777777-7777-7777-7777-777777777777",
-              "Storage": "256GB",
-              "CostPrice": 1000,
-              "SellingPrice": 1200,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "77777777-7777-7777-7777-777777777777",
-              "Storage": "512GB",
-              "CostPrice": 1100,
-              "SellingPrice": 1300,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "77777777-7777-7777-7777-777777777777",
-              "Storage": "1024GB",
-              "CostPrice": 1300,
-              "SellingPrice": 1500,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "88888888-8888-8888-8888-888888888888",
-              "Storage": "128GB",
-              "CostPrice": 900,
-              "SellingPrice": 1100,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "88888888-8888-8888-8888-888888888888",
-              "Storage": "256GB",
-              "CostPrice": 1000,
-              "SellingPrice": 1200,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "88888888-8888-8888-8888-888888888888",
-              "Storage": "512GB",
-              "CostPrice": 1100,
-              "SellingPrice": 1300,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "88888888-8888-8888-8888-888888888888",
-              "Storage": "1024GB",
-              "CostPrice": 1300,
-              "SellingPrice": 1500,
-              "StockQuantity": 50
-            }
-          ]
-        },
-        {
-          "ItemName": "iphone 16 e",
-          "Description": "Economical version of iPhone 16",
-          "Picture": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16e-128gb_1_1.png",
-          "ReleaseDate": "2025-03-15T00:00:00",
-          "ManufacturerID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-          "Colors": [
-            {
-              "ColorID": "99999999-9999-9999-9999-999999999999",
-              "Name": "đen",
-              "UrlImage": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16e-128gb_1_1.png"
-            },
-            {
-              "ColorID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-              "Name": "trắng",
-              "UrlImage": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16e-128gb_1__1.png"
-            }
-          ],
-          "Variants": [
-            {
-              "ColorID": "99999999-9999-9999-9999-999999999999",
-              "Storage": "128GB",
-              "CostPrice": 800,
-              "SellingPrice": 950,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "99999999-9999-9999-9999-999999999999",
-              "Storage": "256GB",
-              "CostPrice": 900,
-              "SellingPrice": 1050,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "99999999-9999-9999-9999-999999999999",
-              "Storage": "512GB",
-              "CostPrice": 1000,
-              "SellingPrice": 1150,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-              "Storage": "128GB",
-              "CostPrice": 800,
-              "SellingPrice": 950,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-              "Storage": "256GB",
-              "CostPrice": 900,
-              "SellingPrice": 1050,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-              "Storage": "512GB",
-              "CostPrice": 1000,
-              "SellingPrice": 1150,
-              "StockQuantity": 50
-            }
-          ]
-        },
-        {
-          "ItemName": "iphone 16 plus",
-          "Description": "Enhanced version with extra features",
-          "Picture": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-den.png",
-          "ReleaseDate": "2025-03-15T00:00:00",
-          "ManufacturerID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-          "Colors": [
-            {
-              "ColorID": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-              "Name": "đen",
-              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-den.png"
-            },
-            {
-              "ColorID": "cccccccc-cccc-cccc-cccc-cccccccccccc",
-              "Name": "trắng",
-              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-trang.png"
-            },
-            {
-              "ColorID": "dddddddd-dddd-dddd-dddd-dddddddddddd",
-              "Name": "hồng",
-              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-hong.png"
-            },
-            {
-              "ColorID": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
-              "Name": "xanh mòng két",
-              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-xanh-mong-ket.png"
-            },
-            {
-              "ColorID": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-              "Name": "xanh lưu ly",
-              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-xanh-luu-ly.png"
-            }
-          ],
-          "Variants": [
-            {
-              "ColorID": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-              "Storage": "128GB",
-              "CostPrice": 850,
-              "SellingPrice": 1000,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-              "Storage": "256GB",
-              "CostPrice": 950,
-              "SellingPrice": 1100,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-              "Storage": "512GB",
-              "CostPrice": 1050,
-              "SellingPrice": 1200,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "cccccccc-cccc-cccc-cccc-cccccccccccc",
-              "Storage": "128GB",
-              "CostPrice": 850,
-              "SellingPrice": 1000,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "cccccccc-cccc-cccc-cccc-cccccccccccc",
-              "Storage": "256GB",
-              "CostPrice": 950,
-              "SellingPrice": 1100,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "cccccccc-cccc-cccc-cccc-cccccccccccc",
-              "Storage": "512GB",
-              "CostPrice": 1050,
-              "SellingPrice": 1200,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "dddddddd-dddd-dddd-dddd-dddddddddddd",
-              "Storage": "128GB",
-              "CostPrice": 850,
-              "SellingPrice": 1000,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "dddddddd-dddd-dddd-dddd-dddddddddddd",
-              "Storage": "256GB",
-              "CostPrice": 950,
-              "SellingPrice": 1100,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "dddddddd-dddd-dddd-dddd-dddddddddddd",
-              "Storage": "512GB",
-              "CostPrice": 1050,
-              "SellingPrice": 1200,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
-              "Storage": "128GB",
-              "CostPrice": 850,
-              "SellingPrice": 1000,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
-              "Storage": "256GB",
-              "CostPrice": 950,
-              "SellingPrice": 1100,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
-              "Storage": "512GB",
-              "CostPrice": 1050,
-              "SellingPrice": 1200,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-              "Storage": "128GB",
-              "CostPrice": 850,
-              "SellingPrice": 1000,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-              "Storage": "256GB",
-              "CostPrice": 950,
-              "SellingPrice": 1100,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "ffffffff-ffff-ffff-ffff-ffffffffffff",
-              "Storage": "512GB",
-              "CostPrice": 1050,
-              "SellingPrice": 1200,
-              "StockQuantity": 50
-            }
-          ]
-        },
-        {
-          "ItemName": "iphone 16",
-          "Description": "Standard version of iPhone 16",
-          "Picture": "",
-          "ReleaseDate": "2025-03-15T00:00:00",
-          "ManufacturerID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-          "Colors": [
-            {
-              "ColorID": "11111111-aaaa-1111-aaaa-11111111aaaa",
-              "Name": "đen",
-              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-den.png"
-            },
-            {
-              "ColorID": "22222222-bbbb-2222-bbbb-22222222bbbb",
-              "Name": "trắng",
-              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-trang.png"
-            },
-            {
-              "ColorID": "33333333-cccc-3333-cccc-33333333cccc",
-              "Name": "hồng",
-              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-hong.png"
-            },
-            {
-              "ColorID": "44444444-dddd-4444-dddd-44444444dddd",
-              "Name": "xanh móng két",
-              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-xanh-mong-ket.png"
-            },
-            {
-              "ColorID": "55555555-eeee-5555-eeee-55555555eeee",
-              "Name": "xanh lưu ly",
-              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-xanh-luu-ly.png"
-            }
-          ],
-          "Variants": [
-            {
-              "ColorID": "11111111-aaaa-1111-aaaa-11111111aaaa",
-              "Storage": "128GB",
-              "CostPrice": 850,
-              "SellingPrice": 1000,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "11111111-aaaa-1111-aaaa-11111111aaaa",
-              "Storage": "256GB",
-              "CostPrice": 950,
-              "SellingPrice": 1100,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "11111111-aaaa-1111-aaaa-11111111aaaa",
-              "Storage": "512GB",
-              "CostPrice": 1050,
-              "SellingPrice": 1200,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "22222222-bbbb-2222-bbbb-22222222bbbb",
-              "Storage": "128GB",
-              "CostPrice": 850,
-              "SellingPrice": 1000,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "22222222-bbbb-2222-bbbb-22222222bbbb",
-              "Storage": "256GB",
-              "CostPrice": 950,
-              "SellingPrice": 1100,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "22222222-bbbb-2222-bbbb-22222222bbbb",
-              "Storage": "512GB",
-              "CostPrice": 1050,
-              "SellingPrice": 1200,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "33333333-cccc-3333-cccc-33333333cccc",
-              "Storage": "128GB",
-              "CostPrice": 850,
-              "SellingPrice": 1000,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "33333333-cccc-3333-cccc-33333333cccc",
-              "Storage": "256GB",
-              "CostPrice": 950,
-              "SellingPrice": 1100,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "33333333-cccc-3333-cccc-33333333cccc",
-              "Storage": "512GB",
-              "CostPrice": 1050,
-              "SellingPrice": 1200,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "44444444-dddd-4444-dddd-44444444dddd",
-              "Storage": "128GB",
-              "CostPrice": 850,
-              "SellingPrice": 1000,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "44444444-dddd-4444-dddd-44444444dddd",
-              "Storage": "256GB",
-              "CostPrice": 950,
-              "SellingPrice": 1100,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "44444444-dddd-4444-dddd-44444444dddd",
-              "Storage": "512GB",
-              "CostPrice": 1050,
-              "SellingPrice": 1200,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "55555555-eeee-5555-eeee-55555555eeee",
-              "Storage": "128GB",
-              "CostPrice": 850,
-              "SellingPrice": 1000,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "55555555-eeee-5555-eeee-55555555eeee",
-              "Storage": "256GB",
-              "CostPrice": 950,
-              "SellingPrice": 1100,
-              "StockQuantity": 50
-            },
-            {
-              "ColorID": "55555555-eeee-5555-eeee-55555555eeee",
-              "Storage": "512GB",
-              "CostPrice": 1050,
               "SellingPrice": 1200,
               "StockQuantity": 50
             }
           ]
         }
       ]
+    }
+  ],
+  "Customers": [
+    {
+      "CustomerID": "00000000-0000-0000-0000-000000000001",
+      "Name": "Customer 1",
+      "Email": "customer1@example.com",
+      "Phone": "0123456789",
+      "Address": "Address 1",
+      "Invoices": [
+        {
+          "InvoiceID": "00000000-0000-0000-0000-000000010001",
+          "Date": "2025-03-15T12:00:00Z",
+          "TotalAmount": 1100,
+          "InvoiceDetails": [
+            {
+              "InvoiceDetailID": "00000000-0000-0000-0000-000000011001",
+              "VariantID": "00000000-0000-0000-0000-000000001001",
+              "Quantity": 1,
+              "Price": 1100
+            }
+          ]
+        },
+        {
+          "InvoiceID": "00000000-0000-0000-0000-000000010002",
+          "Date": "2025-03-16T12:00:00Z",
+          "TotalAmount": 1200,
+          "InvoiceDetails": [
+            {
+              "InvoiceDetailID": "00000000-0000-0000-0000-000000011002",
+              "VariantID": "00000000-0000-0000-0000-000000001002",
+              "Quantity": 1,
+              "Price": 1200
+            }
+          ]
+        },
+        {
+          "InvoiceID": "00000000-0000-0000-0000-000000010003",
+          "Date": "2025-03-17T12:00:00Z",
+          "TotalAmount": 1100,
+          "InvoiceDetails": [
+            {
+              "InvoiceDetailID": "00000000-0000-0000-0000-000000011003",
+              "VariantID": "00000000-0000-0000-0000-000000001001",
+              "Quantity": 1,
+              "Price": 1100
+            }
+          ]
+        },
+        {
+          "InvoiceID": "00000000-0000-0000-0000-000000010004",
+          "Date": "2025-03-18T12:00:00Z",
+          "TotalAmount": 1200,
+          "InvoiceDetails": [
+            {
+              "InvoiceDetailID": "00000000-0000-0000-0000-000000011004",
+              "VariantID": "00000000-0000-0000-0000-000000001002",
+              "Quantity": 1,
+              "Price": 1200
+            }
+          ]
+        },
+        {
+          "InvoiceID": "00000000-0000-0000-0000-000000010005",
+          "Date": "2025-03-19T12:00:00Z",
+          "TotalAmount": 1100,
+          "InvoiceDetails": [
+            {
+              "InvoiceDetailID": "00000000-0000-0000-0000-000000011005",
+              "VariantID": "00000000-0000-0000-0000-000000001001",
+              "Quantity": 1,
+              "Price": 1100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "CustomerID": "00000000-0000-0000-0000-000000000002",
+      "Name": "Customer 2",
+      "Email": "customer2@example.com",
+      "Phone": "0987654321",
+      "Address": "Address 2",
+      "Invoices": [
+        {
+          "InvoiceID": "00000000-0000-0000-0000-000000020001",
+          "Date": "2025-03-15T12:00:00Z",
+          "TotalAmount": 1100,
+          "InvoiceDetails": [
+            {
+              "InvoiceDetailID": "00000000-0000-0000-0000-000000021001",
+              "VariantID": "00000000-0000-0000-0000-000000001001",
+              "Quantity": 1,
+              "Price": 1100
+            }
+          ]
+        },
+        {
+          "InvoiceID": "00000000-0000-0000-0000-000000020002",
+          "Date": "2025-03-16T12:00:00Z",
+          "TotalAmount": 1200,
+          "InvoiceDetails": [
+            {
+              "InvoiceDetailID": "00000000-0000-0000-0000-000000021002",
+              "VariantID": "00000000-0000-0000-0000-000000001002",
+              "Quantity": 1,
+              "Price": 1200
+            }
+          ]
+        },
+        {
+          "InvoiceID": "00000000-0000-0000-0000-000000020003",
+          "Date": "2025-03-17T12:00:00Z",
+          "TotalAmount": 1100,
+          "InvoiceDetails": [
+            {
+              "InvoiceDetailID": "00000000-0000-0000-0000-000000021003",
+              "VariantID": "00000000-0000-0000-0000-000000001001",
+              "Quantity": 1,
+              "Price": 1100
+            }
+          ]
+        },
+        {
+          "InvoiceID": "00000000-0000-0000-0000-000000020004",
+          "Date": "2025-03-18T12:00:00Z",
+          "TotalAmount": 1200,
+          "InvoiceDetails": [
+            {
+              "InvoiceDetailID": "00000000-0000-0000-0000-000000021004",
+              "VariantID": "00000000-0000-0000-0000-000000001002",
+              "Quantity": 1,
+              "Price": 1200
+            }
+          ]
+        },
+        {
+          "InvoiceID": "00000000-0000-0000-0000-000000020005",
+          "Date": "2025-03-19T12:00:00Z",
+          "TotalAmount": 1100,
+          "InvoiceDetails": [
+            {
+              "InvoiceDetailID": "00000000-0000-0000-0000-000000021005",
+              "VariantID": "00000000-0000-0000-0000-000000001001",
+              "Quantity": 1,
+              "Price": 1100
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "CustomerID": "00000000-0000-0000-0000-000000000003",
+      "Name": "Customer 3",
+      "Email": "customer3@example.com",
+      "Phone": "0111222333",
+      "Address": "Address 3",
+      "Invoices": [
+        {
+          "InvoiceID": "00000000-0000-0000-0000-000000030001",
+          "Date": "2025-03-15T12:00:00Z",
+          "TotalAmount": 1100,
+          "InvoiceDetails": [
+            {
+              "InvoiceDetailID": "00000000-0000-0000-0000-000000031001",
+              "VariantID": "00000000-0000-0000-0000-000000001001",
+              "Quantity": 1,
+              "Price": 1100
+            }
+          ]
+        },
+        {
+          "InvoiceID": "00000000-0000-0000-0000-000000030002",
+          "Date": "2025-03-16T12:00:00Z",
+          "TotalAmount": 1200,
+          "InvoiceDetails": [
+            {
+              "InvoiceDetailID": "00000000-0000-0000-0000-000000031002",
+              "VariantID": "00000000-0000-0000-0000-000000001002",
+              "Quantity": 1,
+              "Price": 1200
+            }
+          ]
+        },
+        {
+          "InvoiceID": "00000000-0000-0000-0000-000000030003",
+          "Date": "2025-03-17T12:00:00Z",
+          "TotalAmount": 1100,
+          "InvoiceDetails": [
+            {
+              "InvoiceDetailID": "00000000-0000-0000-0000-000000031003",
+              "VariantID": "00000000-0000-0000-0000-000000001001",
+              "Quantity": 1,
+              "Price": 1100
+            }
+          ]
+        },
+        {
+          "InvoiceID": "00000000-0000-0000-0000-000000030004",
+          "Date": "2025-03-18T12:00:00Z",
+          "TotalAmount": 1200,
+          "InvoiceDetails": [
+            {
+              "InvoiceDetailID": "00000000-0000-0000-0000-000000031004",
+              "VariantID": "00000000-0000-0000-0000-000000001002",
+              "Quantity": 1,
+              "Price": 1200
+            }
+          ]
+        },
+        {
+          "InvoiceID": "00000000-0000-0000-0000-000000030005",
+          "Date": "2025-03-19T12:00:00Z",
+          "TotalAmount": 1100,
+          "InvoiceDetails": [
+            {
+              "InvoiceDetailID": "00000000-0000-0000-0000-000000031005",
+              "VariantID": "00000000-0000-0000-0000-000000001001",
+              "Quantity": 1,
+              "Price": 1100
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "InventoryTransactions": [
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000111001",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-15T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000011001"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000111002",
+      "VariantID": "00000000-0000-0000-0000-000000001002",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-16T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000011002"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000111003",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-17T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000011003"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000111004",
+      "VariantID": "00000000-0000-0000-0000-000000001002",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-18T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000011004"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000111005",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-19T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000011005"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000121001",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-15T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000021001"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000121002",
+      "VariantID": "00000000-0000-0000-0000-000000001002",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-16T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000021002"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000121003",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-17T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000021003"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000121004",
+      "VariantID": "00000000-0000-0000-0000-000000001002",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-18T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000021004"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000121005",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-19T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000021005"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000131001",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-15T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000031001"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000131002",
+      "VariantID": "00000000-0000-0000-0000-000000001002",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-16T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000031002"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000131003",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-17T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000031003"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000131004",
+      "VariantID": "00000000-0000-0000-0000-000000001002",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-18T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000031004"
+    },
+    {
+      "TransactionID": "00000000-0000-0000-0000-000000131005",
+      "VariantID": "00000000-0000-0000-0000-000000001001",
+      "TransactionType": 1,
+      "Quantity": 1,
+      "TransactionDate": "2025-03-19T12:00:00Z",
+      "InvoiceDetailID": "00000000-0000-0000-0000-000000031005"
     }
   ]
 }

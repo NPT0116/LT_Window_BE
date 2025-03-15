@@ -32,6 +32,8 @@ namespace src.Models
         public DateTime TransactionDate { get; set; }
 
         // (Tùy chọn) Nếu là giao dịch xuất hàng qua hóa đơn, có thể lưu lại ID chi tiết hóa đơn
+        [ForeignKey("InvoiceDetail")]
         public Guid? InvoiceDetailID { get; set; }
+        public InvoiceDetail? InvoiceDetail { get; set; }
     }
 }

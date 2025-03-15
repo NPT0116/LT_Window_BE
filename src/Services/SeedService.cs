@@ -1,15 +1,21 @@
 using System;
+using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using src.Data;
 using src.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace src.Services;
-
-public class SeedData
+namespace src.Services
 {
-    public List<Manufacturer> Manufacturers { get; set; } = new List<Manufacturer>();
-    public List<ItemGroup> ItemGroups { get; set; } = new List<ItemGroup>();
-}
+    // Lớp chứa cấu trúc dữ liệu seed từ file JSON
+    public class SeedData
+    {
+        public List<Manufacturer> Manufacturers { get; set; } = new List<Manufacturer>();
+        public List<ItemGroup> ItemGroups { get; set; } = new List<ItemGroup>();
+        public List<Customer> Customers { get; set; } = new List<Customer>();
+        public List<InventoryTransaction> InventoryTransactions { get; set; } = new List<InventoryTransaction>();
+    }
 
     public class SeedService
     {
@@ -21,92 +27,65 @@ public class SeedData
             _context = context;
             _env = env;
         }
-public async Task SeedAsync()
-{
-    // Seed Manufacturers nếu chưa có
-    if (!_context.Manufacturers.Any())
-    {
-        var seedFile = Path.Combine(_env.ContentRootPath, "seed.json");
-        if (File.Exists(seedFile))
-        {
-            var json = await File.ReadAllTextAsync(seedFile);
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            var seedData = JsonSerializer.Deserialize<SeedData>(json, options);
-            if (seedData != null && seedData.Manufacturers != null)
-            {
-                foreach (var m in seedData.Manufacturers)
-                {
-                    // Thêm kiểm tra nếu cần: ví dụ, kiểm tra xem manufacturer có tồn tại không
-                    _context.Manufacturers.Add(m);
-                }
-                await _context.SaveChangesAsync();
-            }
-        }
-    }
-    
-    // Seed ItemGroups (và Items) nếu chưa có
-    if (!_context.ItemGroups.Any())
-    {
-        var seedFile = Path.Combine(_env.ContentRootPath, "seed.json");
-        if (File.Exists(seedFile))
-        {
-            var json = await File.ReadAllTextAsync(seedFile);
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            var seedData = JsonSerializer.Deserialize<SeedData>(json, options);
-            if (seedData != null)
-            {
-                foreach (var group in seedData.ItemGroups)
-                {
-                    if (group.ItemGroupID == Guid.Empty)
-                        group.ItemGroupID = Guid.NewGuid();
-                    
-                    foreach (var item in group.Items)
-                    {
-                        if (item.ItemID == Guid.Empty)
-                            item.ItemID = Guid.NewGuid();
 
-                        // Chuyển đổi ReleaseDate sang UTC nếu cần
-                        if (item.ReleaseDate.Kind != DateTimeKind.Utc)
-                        {
-                            item.ReleaseDate = DateTime.SpecifyKind(item.ReleaseDate, DateTimeKind.Utc);
-                        }
-                        
-                        // Nếu ManufacturerID là Guid.Empty, bạn có thể gán mặc định cho nó
-                        // Nhưng nếu đã có trong file seed.json, hãy đảm bảo nó trùng với manufacturer "Apple"
-                        if (item.ManufacturerID == Guid.Empty)
-                        {
-                            // Gán ManufacturerID của "Apple" đã seed, ví dụ:
-                            item.ManufacturerID = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
-                        }
-                        
-                        // Gán ItemID cho các Color của item
-                        if (item.Colors != null)
-                        {
-                            foreach (var color in item.Colors)
-                            {
-                                color.ItemID = item.ItemID;
-                            }
-                        }
-                        
-                        // Gán ItemID cho các Variant của item
-                        if (item.Variants != null)
-                        {
-                            foreach (var variant in item.Variants)
-                            {
-                                variant.ItemID = item.ItemID;
-                            }
-                        }
-                    }
-                    _context.ItemGroups.Add(group);
-                }
-                await _context.SaveChangesAsync();
+        /// <summary>
+        /// Seed dữ liệu từ file JSON.
+        /// Nếu resetDb = true, DB sẽ được xóa sạch và migration được chạy lại.
+        /// </summary>
+        public async Task SeedAsync(bool resetDb = false)
+        {
+            // 1. Xóa và chạy lại migration nếu có yêu cầu reset
+            if (resetDb)
+            {
+                Console.WriteLine("Resetting database...");
+                await _context.Database.EnsureDeletedAsync();   // Xóa DB
+                await _context.Database.MigrateAsync();         // Tạo lại DB theo migration
             }
+
+            // 2. Đọc file seed JSON
+            var seedFile = Path.Combine(_env.ContentRootPath, "seed.json");
+            if (!File.Exists(seedFile))
+            {
+                Console.WriteLine("Seed file not found: " + seedFile);
+                return;
+            }
+
+            var json = await File.ReadAllTextAsync(seedFile);
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var seedData = JsonSerializer.Deserialize<SeedData>(json, options);
+
+            if (seedData == null)
+            {
+                Console.WriteLine("Unable to parse seed data from JSON.");
+                return;
+            }
+
+            // 3. Seed Manufacturers nếu bảng trống
+            if (!_context.Manufacturers.Any())
+            {
+                _context.Manufacturers.AddRange(seedData.Manufacturers);
+            }
+
+            // 4. Seed ItemGroups (bao gồm Items, Colors, Variants) nếu bảng trống
+            if (!_context.ItemGroups.Any())
+            {
+                _context.ItemGroups.AddRange(seedData.ItemGroups);
+            }
+
+            // 5. Seed Customers (bao gồm Invoices, InvoiceDetails, InventoryTransaction)
+            //    nếu bảng Customers trống
+            if (!_context.Customers.Any())
+            {
+                // Khi AddRange Customers, EF sẽ track toàn bộ object graph:
+                //  => Invoice, InvoiceDetail, InventoryTransaction (nếu có)
+                _context.Customers.AddRange(seedData.Customers);
+            }
+            if (!_context.InventoryTransactions.Any())
+            {
+                _context.InventoryTransactions.AddRange(seedData.InventoryTransactions);
+            }
+            // 6. Lưu các thay đổi
+            await _context.SaveChangesAsync();
         }
     }
 }
-
-    
-    
-
-
-    }

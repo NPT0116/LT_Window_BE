@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using src.Dto;
 using src.Dto.Invoice;
 using src.Interfaces;
+using src.Query;
 using src.Utils;
 
 namespace src.Controllers
@@ -45,9 +46,9 @@ namespace src.Controllers
 
         // GET: api/invoice
         [HttpGet]
-        public async Task<IActionResult> GetAllInvoices()
+        public async Task<IActionResult> GetAllInvoices([FromQuery] InvoiceQueryParameter queryInvoiceParameter)
         {
-            var invoices = await _invoiceRepository.GetAllInvoicesAsync();
+            var invoices = await _invoiceRepository.GetAllInvoicesAsync(queryInvoiceParameter);
             var response = new Response<IEnumerable<InvoiceDto>>(invoices)
             {
                 Message = "Invoices retrieved successfully.",
