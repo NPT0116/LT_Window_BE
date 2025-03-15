@@ -2,6 +2,7 @@ using System;
 using src.Data;
 using src.Dto.Color;
 using src.Exceptions.Color;
+using src.Exceptions.Variant;
 using src.Interfaces;
 
 namespace src.Repositories;
@@ -28,6 +29,17 @@ private readonly ApplicationDbContext _context;
             ItemID = color.ItemID,
             UrlImage = color.UrlImage
         };
+    }
+
+    public async Task<string> GetImageByVariantIdAsync(Guid variantId)
+    {
+        var variant = await _context.Variants.FindAsync(variantId);
+        if (variant == null)
+            throw new VariantNotFound(variantId);
+        var color = await _context.Colors.FindAsync(variant.ColorID);
+        if (color == null)
+            throw new ColorNotFound(variant.ColorID);
+        return color.UrlImage;
     }
 
     public async Task<ColorDto> UpdateAsync(Guid id, UpdateColorDto colorDto)
