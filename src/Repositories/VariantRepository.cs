@@ -6,12 +6,7 @@ using src.Interfaces;
 using src.Models;
 using src.Query;
 using src.Utils;
-using src.Query;
-using src.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace src.Repositories
 {
@@ -207,6 +202,25 @@ if (!string.IsNullOrEmpty(parameters.Search))
                     await _context.SaveChangesAsync();
                 }
             }
+        }
+
+     public async Task<string> GetVariantNameByIdAsync(Guid id)
+        {
+            // Truy vấn variant kèm theo thông tin liên quan từ bảng Item và Color
+            var variant = await _context.Variants
+                .Include(v => v.Item)
+                .Include(v => v.Color)
+                .FirstOrDefaultAsync(v => v.VariantID == id);
+
+            if (variant == null)
+                throw new ArgumentException($"Không tìm thấy variant với id: {id}", nameof(id));
+
+            // Lấy thông tin từ các đối tượng liên quan
+            string itemName = variant.Item?.ItemName ?? "Unknown Item";
+            string storage = string.IsNullOrEmpty(variant.Storage) ? "No Storage" : variant.Storage;
+            string colorName = variant.Color?.Name ?? "Unknown Color";
+
+            return $"{itemName} - {storage} - {colorName}";
         }
     }
 }

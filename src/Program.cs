@@ -1,3 +1,4 @@
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using src.Data;
@@ -18,6 +19,7 @@ builder.Services.AddLogging(loggingBuilder =>
 });
 builder.Services.AddProblemDetails();
 builder.Configuration.AddJsonFile("seedData.json", optional: true, reloadOnChange: true);
+QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
 
 // DB configuration
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -47,6 +49,8 @@ builder.Services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 builder.Services.AddScoped<IInventoryTransactionRepository, InventoryTransactionRepository>();
+builder.Services.AddTransient<PdfInvoiceService>();
+builder.Services.AddTransient<HtmlInvoiceService>();
 
 // Cấu hình Swagger
 builder.Services.AddControllers();
