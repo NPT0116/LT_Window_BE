@@ -10,8 +10,8 @@ public interface IVariantRepository
     Task<List<VariantDto>> GetVariantByItemIdAsync(Guid id);
     Task<VariantDto> GetVariantByIdAsync(Guid id);
     Task<VariantDto> UpdateVariantAsync(UpdateVariantDto variantDto);
- Task<PagedResponse<List<VariantDto>>> GetAllVariantsAsync(VariantQueryParameters queryParameters);
- Task DeleteVariantAsync(Guid variantId);
- Task<string> GetVariantNameByIdAsync(Guid id);
+    Task<PagedResponse<List<GetAllVariant>>> GetAllVariantsAsync(VariantQueryParameters queryParameters);
+    Task DeleteVariantAsync(Guid variantId);
+    Task<string> GetVariantNameByIdAsync(Guid id);
 
 }
