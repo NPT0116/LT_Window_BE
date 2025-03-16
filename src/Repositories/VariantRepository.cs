@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using src.Data;
+using src.Dto.Color;
+using src.Dto.Item;
+using src.Dto.Manufacturer;
 using src.Dto.Variant;
 using src.Exceptions.Variant;
 using src.Interfaces;
@@ -80,7 +83,7 @@ namespace src.Repositories
             };
         }
 
-         public async Task<PagedResponse<List<VariantDto>>> GetAllVariantsAsync(VariantQueryParameters parameters)
+         public async Task<PagedResponse<List<GetAllVariant>>> GetAllVariantsAsync(VariantQueryParameters parameters)
         {
             var query = _context.Variants
                 .Include(v => v.Color)
@@ -143,22 +146,34 @@ if (!string.IsNullOrEmpty(parameters.Search))
             var variants = await query
                 .Skip((parameters.PageNumber - 1) * parameters.PageSize)
                 .Take(parameters.PageSize)
+                .Include(v => v.Color)
+                .Include(v => v.Item)
+                .Select(v => new GetAllVariant
+                {
+                    VariantID = v.VariantID,
+                    itemDto = new ItemDto
+                    {
+                        ItemID = v.Item.ItemID,
+                        ItemName = v.Item.ItemName,
+                    },
+                    colorDto = new ColorDto
+                    {
+                        ColorID = v.Color.ColorID,
+                        Name = v.Color.Name,
+                        UrlImage = v.Color.UrlImage
+                        
+                    },
+                    Storage = v.Storage,
+                    CostPrice = v.CostPrice,
+                    SellingPrice = v.SellingPrice,
+                    StockQuantity = v.StockQuantity
+                })
                 .ToListAsync();
 
-            var variantDtos = variants.Select(v => new VariantDto
-            {
-                VariantID = v.VariantID,
-                ItemID = v.ItemID,
-                ColorID = v.ColorID,
-                Storage = v.Storage,
-                CostPrice = v.CostPrice,
-                SellingPrice = v.SellingPrice,
-                StockQuantity = v.StockQuantity,
-            }).ToList();
 
             Uri CreatePageUri(int page) => new Uri($"http://localhost:5142/api/Variant/GetAll?PageNumber={page}&PageSize={parameters.PageSize}");
 
-            var pagedResponse = new PagedResponse<List<VariantDto>>(variantDtos, parameters.PageNumber, parameters.PageSize)
+            var pagedResponse = new PagedResponse<List<GetAllVariant>>(variants, parameters.PageNumber, parameters.PageSize)
             {
                 TotalRecords = totalRecords,
                 TotalPages = totalPages,
