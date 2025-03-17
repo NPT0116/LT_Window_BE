@@ -7,6 +7,8 @@ public class InvoiceQueryParameter
     public InvoiceDatetimeQueryParameter? invoiceDatetimeQueryParameter { get; set; }
     public string? CustomerName { get; set; }
     public string? CustomerPhone { get; set; }
+    public int PageNumber { get; set; } = 1;
+    public int PageSize { get; set; } = 10;
 }
 
 public class InvoiceDatetimeQueryParameter 

@@ -10,6 +10,7 @@ using src.Exceptions.Variant;
 using src.Interfaces;
 using src.Models;
 using src.Query;
+using src.Utils;
 
 namespace src.Repositories;
 
@@ -149,47 +150,67 @@ public async Task<InvoiceDto> CreateInvoiceAsync(CreateInvoiceDto invoiceDto)
 
 
 
-    public async Task<IEnumerable<InvoiceDto>> GetAllInvoicesAsync(InvoiceQueryParameter queryInvoiceParameter)
-    {
-        var invoices =  _context.Invoices.Include(i => i.InvoiceDetails).AsQueryable();
-        if (queryInvoiceParameter.invoiceDatetimeQueryParameter != null)
-        {
-            invoices = invoices.Where(i => i.Date >= queryInvoiceParameter.invoiceDatetimeQueryParameter.FromDate && i.Date <= queryInvoiceParameter.invoiceDatetimeQueryParameter.ToDate);
-            if (queryInvoiceParameter.invoiceDatetimeQueryParameter.sortDirection == "desc")
-            {
-                invoices = invoices.OrderByDescending(i => i.Date);
-            }
-            else
-            {
-                invoices = invoices.OrderBy(i => i.Date);
-            }
-        }
-        if (!string.IsNullOrWhiteSpace(queryInvoiceParameter.CustomerName))
-        {
-            invoices = invoices.Where(i => i.Customer.Name.Contains(queryInvoiceParameter.CustomerName));
-        }
-        if (!string.IsNullOrWhiteSpace(queryInvoiceParameter.CustomerPhone))
-        {
-            invoices = invoices.Where(i => i.Customer.Phone.Contains(queryInvoiceParameter.CustomerPhone));
-        }
+   public async Task<PagedResponse<ICollection<InvoiceDto>>> GetAllInvoicesAsync(InvoiceQueryParameter queryInvoiceParameter)
+{
+    // Lấy query ban đầu từ bảng Invoices
+    var query = _context.Invoices
+        .Include(i => i.InvoiceDetails)
+        .AsQueryable();
 
-        var finalResponse = await invoices.ToListAsync();
-        var invoiceDtos = finalResponse.Select(i => new InvoiceDto
-        {
-            InvoiceID = i.InvoiceID,
-            CustomerID = i.CustomerID,
-            Date = i.Date,
-            TotalAmount = i.TotalAmount,
-            InvoiceDetails = [.. i.InvoiceDetails.Select(d => new InvoiceDetailDto
-            {
-                InvoiceDetailID = d.InvoiceDetailID,
-                VariantID = d.VariantID,
-                Quantity = d.Quantity,
-                Price = d.Price
-            })]
-        });
-        return invoiceDtos;
+    // Áp dụng các điều kiện lọc nếu có
+    if (queryInvoiceParameter.invoiceDatetimeQueryParameter != null)
+    {
+        query = query.Where(i => i.Date >= queryInvoiceParameter.invoiceDatetimeQueryParameter.FromDate &&
+                                 i.Date <= queryInvoiceParameter.invoiceDatetimeQueryParameter.ToDate);
+        query = queryInvoiceParameter.invoiceDatetimeQueryParameter.sortDirection == "desc"
+            ? query.OrderByDescending(i => i.Date)
+            : query.OrderBy(i => i.Date);
     }
+    if (!string.IsNullOrWhiteSpace(queryInvoiceParameter.CustomerName))
+    {
+        query = query.Where(i => i.Customer.Name.Contains(queryInvoiceParameter.CustomerName));
+    }
+    if (!string.IsNullOrWhiteSpace(queryInvoiceParameter.CustomerPhone))
+    {
+        query = query.Where(i => i.Customer.Phone.Contains(queryInvoiceParameter.CustomerPhone));
+    }
+
+    // Lấy tổng số record
+    int totalRecords = await query.CountAsync();
+    // Tính số trang (có thể làm tròn lên nếu có dư)
+    int totalPages = (int)Math.Ceiling(totalRecords / (double)queryInvoiceParameter.PageSize);
+
+    // Lấy danh sách theo phân trang
+    var finalResponse = await query
+        .Skip((queryInvoiceParameter.PageNumber - 1) * queryInvoiceParameter.PageSize)
+        .Take(queryInvoiceParameter.PageSize)
+        .ToListAsync();
+
+    var invoiceDtos = finalResponse.Select(i => new InvoiceDto
+    {
+        InvoiceID = i.InvoiceID,
+        CustomerID = i.CustomerID,
+        Date = i.Date,
+        TotalAmount = i.TotalAmount,
+        InvoiceDetails = i.InvoiceDetails.Select(d => new InvoiceDetailDto
+        {
+            InvoiceDetailID = d.InvoiceDetailID,
+            VariantID = d.VariantID,
+            Quantity = d.Quantity,
+            Price = d.Price
+        }).ToList()
+    }).ToList();
+
+    // Tạo đối tượng phân trang với các trường bổ sung TotalRecords và TotalPages
+    var response = new PagedResponse<ICollection<InvoiceDto>>(invoiceDtos, queryInvoiceParameter.PageNumber, queryInvoiceParameter.PageSize)
+    {
+        TotalRecords = totalRecords,
+        TotalPages = totalPages
+    };
+
+    return response;
+}
+
 
 
     public async Task<InvoiceDto> GetInvoiceByIdAsync(Guid invoiceId)

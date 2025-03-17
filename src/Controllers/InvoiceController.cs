@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using src.Dto;
 using src.Dto.Invoice;
 using src.Interfaces;
@@ -68,13 +69,9 @@ namespace src.Controllers
         {
             var invoices = await _invoiceRepository.GetAllInvoicesAsync(queryInvoiceParameter);
 
-            var response = new Response<IEnumerable<InvoiceDto>>(invoices)
-            {
-                Message = "Invoices retrieved successfully.",
-                Succeeded = true
-            };
 
-            return Ok(response);
+
+            return Ok(invoices);
         }
 
         /// <summary>
