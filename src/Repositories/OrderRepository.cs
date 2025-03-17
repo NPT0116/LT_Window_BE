@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using src.Data;
 using src.Dto;
 using src.Dto.Order;
+using src.Exceptions.Customer;
+using src.Exceptions.Order;
 using src.Interfaces;
 using src.Models;
 using System;
@@ -27,12 +29,12 @@ namespace src.Repositories
                 throw new ArgumentNullException(nameof(orderDto));
 
             if (orderDto.OrderDetailDtos == null || !orderDto.OrderDetailDtos.Any())
-                throw new ArgumentException("Đơn đặt hàng phải có ít nhất 1 chi tiết", nameof(orderDto.OrderDetailDtos));
+                throw new OrderMustHaveAtLestOneDetail();
 
             // Kiểm tra sự tồn tại của khách hàng
             var customer = await _context.Customers.FindAsync(orderDto.CustomerID);
             if (customer == null)
-                throw new Exception($"Không tìm thấy khách hàng với mã {orderDto.CustomerID}");
+                throw new CustomerNotFound(orderDto.CustomerID);
 
             // Tạo mới Order
             var order = new Order
@@ -102,7 +104,7 @@ namespace src.Repositories
                 .Include(o => o.OrderDetails)
                 .FirstOrDefaultAsync(o => o.OrderID == orderId);
             if (order == null)
-                throw new Exception($"Không tìm thấy đơn hàng với mã {orderId}");
+                throw new OrderNotFound(orderId);
 
             return new OrderDto
             {
