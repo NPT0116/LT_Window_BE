@@ -21,7 +21,8 @@ public class ApplicationDbContext: DbContext
          public DbSet<InvoiceDetail> InvoiceDetails { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<InventoryTransaction>  InventoryTransactions { get; set; }
-
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
           protected override void OnModelCreating(ModelBuilder modelBuilder)
          {
              base.OnModelCreating(modelBuilder);
