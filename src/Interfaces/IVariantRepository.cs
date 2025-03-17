@@ -12,5 +12,6 @@ public interface IVariantRepository
     Task<VariantDto> UpdateVariantAsync(UpdateVariantDto variantDto);
  Task<PagedResponse<List<VariantDto>>> GetAllVariantsAsync(VariantQueryParameters queryParameters);
  Task DeleteVariantAsync(Guid variantId);
+ Task<string> GetVariantNameByIdAsync(Guid id);
 
 }

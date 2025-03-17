@@ -7,36 +7,40 @@ using src.Middlewares;
 using src.Repositories;
 using src.Services;
 using src.Utils;
-using System.Reflection; // Needed for Assembly
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Đăng ký logging, config, services, v.v.
 builder.Services.AddLogging(loggingBuilder =>
 {
-    loggingBuilder.AddConsole(); // Log to console
-    loggingBuilder.AddDebug();   // Log to debug output
+    loggingBuilder.AddConsole();
+    loggingBuilder.AddDebug();
 });
 builder.Services.AddProblemDetails();
-// ------------------- add json file
 builder.Configuration.AddJsonFile("seedData.json", optional: true, reloadOnChange: true);
-// DB configuration ----------
+QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
+
+// DB configuration
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-// --global exception handler
+// Global exception handler
 builder.Services.AddExceptionHandler<GlobalExceptionHandlers>();
 
-
-// --Util services like migrations 
+// Đăng ký SeedService
 builder.Services.AddTransient<SeedService>();
-builder.Services.AddHostedService<ApplyMigrationService>();
-// Add services to the container.
 
-builder.Services.AddControllers();
-builder.Services.AddOpenApi();
-// dependency injection
+// Nếu không chạy reset DB, đăng ký dịch vụ migration tự động
+bool resetDb = args.Contains("--resetdb");
+if (!resetDb)
+{
+    builder.Services.AddHostedService<ApplyMigrationService>();
+}
+
+// Đăng ký các repository và dịch vụ khác
 builder.Services.AddScoped<IItemGroupRepository, ItemGroupRepository>();
 builder.Services.AddScoped<IVariantRepository, VariantRepository>();    
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
@@ -45,6 +49,12 @@ builder.Services.AddScoped<IManufacturerRepository, ManufacturerRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 builder.Services.AddScoped<IInventoryTransactionRepository, InventoryTransactionRepository>();
+builder.Services.AddTransient<PdfInvoiceService>();
+builder.Services.AddTransient<HtmlInvoiceService>();
+
+// Cấu hình Swagger
+builder.Services.AddControllers();
+builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
@@ -54,7 +64,6 @@ builder.Services.AddSwaggerGen(c =>
         Description = "API for Phone system management"
     });
     c.OperationFilter<FileUploadOperationFilter>();
-
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -64,7 +73,6 @@ builder.Services.AddSwaggerGen(c =>
         BearerFormat = "JWT",
         Scheme = "Bearer"
     });
-
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
         {
@@ -81,14 +89,15 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+// Cấu hình CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAllOrigins",
         policy =>
         {
-            policy.AllowAnyOrigin()  // Chấp nhận tất cả nguồn (nên giới hạn trong production)
-                  .AllowAnyMethod()   // Chấp nhận tất cả HTTP methods (GET, POST, PUT, DELETE)
-                  .AllowAnyHeader();  // Chấp nhận tất cả headers
+            policy.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
         });
 });
 
@@ -96,7 +105,6 @@ var app = builder.Build();
 
 app.UseCors("AllowAllOrigins");
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
@@ -104,8 +112,18 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Nếu có tham số "--resetdb", tự động reset và seed DB
+if (resetDb)
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var seedService = scope.ServiceProvider.GetRequiredService<SeedService>();
+        Console.WriteLine("Resetting database and seeding data...");
+        await seedService.SeedAsync(true);
+    }
+}
 
 app.UseHttpsRedirection();
-app.UseExceptionHandler(); // Works
+app.UseExceptionHandler();
 app.MapControllers();
 app.Run();

@@ -4,7 +4,7 @@ namespace src.Query;
 
 public class InvoiceQueryParameter
 {
-    public InvoiceDatetimeQueryParameter invoiceDatetimeQueryParameter { get; set; }
+    public InvoiceDatetimeQueryParameter? invoiceDatetimeQueryParameter { get; set; }
     public string? CustomerName { get; set; }
     public string? CustomerPhone { get; set; }
 }
