@@ -94,6 +94,438 @@
               "StockQuantity": 50
             }
           ]
+        },
+        {
+          "ItemID": "00000000-0000-0000-0000-000000000103",
+          "ItemName": "iphone 16 e",
+          "Description": "Economical version of iPhone 16",
+          "Picture": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16e-128gb_1_1.png",
+          "ReleaseDate": "2025-03-15T00:00:00Z",
+          "ManufacturerID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+          "Colors": [
+            {
+              "ColorID": "99999999-9999-9999-9999-999999999999",
+              "Name": "đen",
+              "UrlImage": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16e-128gb_1_1.png",
+              "ItemID": "00000000-0000-0000-0000-000000000103"
+            },
+            {
+              "ColorID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+              "Name": "trắng",
+              "UrlImage": "https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone-16e-128gb_1__1.png",
+              "ItemID": "00000000-0000-0000-0000-000000000103"
+            }
+          ],
+          "Variants": [
+            {
+              "VariantID": "00000000-0000-0000-0000-000000002003",
+              "ItemID": "00000000-0000-0000-0000-000000000103",
+              "ColorID": "99999999-9999-9999-9999-999999999999",
+              "Storage": "128GB",
+              "CostPrice": 800,
+              "SellingPrice": 950,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000002004",
+              "ItemID": "00000000-0000-0000-0000-000000000103",
+              "ColorID": "99999999-9999-9999-9999-999999999999",
+              "Storage": "256GB",
+              "CostPrice": 900,
+              "SellingPrice": 1050,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000002005",
+              "ItemID": "00000000-0000-0000-0000-000000000103",
+              "ColorID": "99999999-9999-9999-9999-999999999999",
+              "Storage": "512GB",
+              "CostPrice": 1000,
+              "SellingPrice": 1150,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000002006",
+              "ItemID": "00000000-0000-0000-0000-000000000103",
+              "ColorID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+              "Storage": "128GB",
+              "CostPrice": 800,
+              "SellingPrice": 950,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000002007",
+              "ItemID": "00000000-0000-0000-0000-000000000103",
+              "ColorID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+              "Storage": "256GB",
+              "CostPrice": 900,
+              "SellingPrice": 1050,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000002008",
+              "ItemID": "00000000-0000-0000-0000-000000000103",
+              "ColorID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+              "Storage": "512GB",
+              "CostPrice": 1000,
+              "SellingPrice": 1150,
+              "StockQuantity": 50
+            }
+          ]
+        },
+        {
+          "ItemID": "00000000-0000-0000-0000-000000000104",
+          "ItemName": "iphone 16 plus",
+          "Description": "Enhanced version with extra features",
+          "Picture": "",
+          "ReleaseDate": "2025-03-15T00:00:00Z",
+          "ManufacturerID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+          "Colors": [
+            {
+              "ColorID": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+              "Name": "đen",
+              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-den.png",
+              "ItemID": "00000000-0000-0000-0000-000000000104"
+            },
+            {
+              "ColorID": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+              "Name": "trắng",
+              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-trang.png",
+              "ItemID": "00000000-0000-0000-0000-000000000104"
+            },
+            {
+              "ColorID": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+              "Name": "hồng",
+              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-hong.png",
+              "ItemID": "00000000-0000-0000-0000-000000000104"
+            },
+            {
+              "ColorID": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+              "Name": "xanh mòng két",
+              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-xanh-mong-ket.png",
+              "ItemID": "00000000-0000-0000-0000-000000000104"
+            },
+            {
+              "ColorID": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+              "Name": "xanh lưu ly",
+              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-xanh-luu-ly.png",
+              "ItemID": "00000000-0000-0000-0000-000000000104"
+            }
+          ],
+          "Variants": [
+            {
+              "VariantID": "00000000-0000-0000-0000-000000003001",
+              "ItemID": "00000000-0000-0000-0000-000000000104",
+              "ColorID": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+              "Storage": "128GB",
+              "CostPrice": 850,
+              "SellingPrice": 1000,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000003002",
+              "ItemID": "00000000-0000-0000-0000-000000000104",
+              "ColorID": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+              "Storage": "256GB",
+              "CostPrice": 950,
+              "SellingPrice": 1100,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000003003",
+              "ItemID": "00000000-0000-0000-0000-000000000104",
+              "ColorID": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+              "Storage": "512GB",
+              "CostPrice": 1050,
+              "SellingPrice": 1200,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000003004",
+              "ItemID": "00000000-0000-0000-0000-000000000104",
+              "ColorID": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+              "Storage": "128GB",
+              "CostPrice": 850,
+              "SellingPrice": 1000,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000003005",
+              "ItemID": "00000000-0000-0000-0000-000000000104",
+              "ColorID": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+              "Storage": "256GB",
+              "CostPrice": 950,
+              "SellingPrice": 1100,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000003006",
+              "ItemID": "00000000-0000-0000-0000-000000000104",
+              "ColorID": "cccccccc-cccc-cccc-cccc-cccccccccccc",
+              "Storage": "512GB",
+              "CostPrice": 1050,
+              "SellingPrice": 1200,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000003007",
+              "ItemID": "00000000-0000-0000-0000-000000000104",
+              "ColorID": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+              "Storage": "128GB",
+              "CostPrice": 850,
+              "SellingPrice": 1000,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000003008",
+              "ItemID": "00000000-0000-0000-0000-000000000104",
+              "ColorID": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+              "Storage": "256GB",
+              "CostPrice": 950,
+              "SellingPrice": 1100,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000003009",
+              "ItemID": "00000000-0000-0000-0000-000000000104",
+              "ColorID": "dddddddd-dddd-dddd-dddd-dddddddddddd",
+              "Storage": "512GB",
+              "CostPrice": 1050,
+              "SellingPrice": 1200,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000003010",
+              "ItemID": "00000000-0000-0000-0000-000000000104",
+              "ColorID": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+              "Storage": "128GB",
+              "CostPrice": 850,
+              "SellingPrice": 1000,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000003011",
+              "ItemID": "00000000-0000-0000-0000-000000000104",
+              "ColorID": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+              "Storage": "256GB",
+              "CostPrice": 950,
+              "SellingPrice": 1100,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000003012",
+              "ItemID": "00000000-0000-0000-0000-000000000104",
+              "ColorID": "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+              "Storage": "512GB",
+              "CostPrice": 1050,
+              "SellingPrice": 1200,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000003013",
+              "ItemID": "00000000-0000-0000-0000-000000000104",
+              "ColorID": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+              "Storage": "128GB",
+              "CostPrice": 850,
+              "SellingPrice": 1000,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000003014",
+              "ItemID": "00000000-0000-0000-0000-000000000104",
+              "ColorID": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+              "Storage": "256GB",
+              "CostPrice": 950,
+              "SellingPrice": 1100,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000003015",
+              "ItemID": "00000000-0000-0000-0000-000000000104",
+              "ColorID": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+              "Storage": "512GB",
+              "CostPrice": 1050,
+              "SellingPrice": 1200,
+              "StockQuantity": 50
+            }
+          ]
+        },
+        {
+          "ItemID": "00000000-0000-0000-0000-000000000105",
+          "ItemName": "iphone 16",
+          "Description": "Standard version of iPhone 16",
+          "Picture": "",
+          "ReleaseDate": "2025-03-15T00:00:00Z",
+          "ManufacturerID": "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+          "Colors": [
+            {
+              "ColorID": "11111111-aaaa-1111-aaaa-11111111aaaa",
+              "Name": "đen",
+              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-den.png",
+              "ItemID": "00000000-0000-0000-0000-000000000105"
+            },
+            {
+              "ColorID": "22222222-bbbb-2222-bbbb-22222222bbbb",
+              "Name": "trắng",
+              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-trang.png",
+              "ItemID": "00000000-0000-0000-0000-000000000105"
+            },
+            {
+              "ColorID": "33333333-cccc-3333-cccc-33333333cccc",
+              "Name": "hồng",
+              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-hong.png",
+              "ItemID": "00000000-0000-0000-0000-000000000105"
+            },
+            {
+              "ColorID": "44444444-dddd-4444-dddd-44444444dddd",
+              "Name": "xanh móng két",
+              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-xanh-mong-ket.png",
+              "ItemID": "00000000-0000-0000-0000-000000000105"
+            },
+            {
+              "ColorID": "55555555-eeee-5555-eeee-55555555eeee",
+              "Name": "xanh lưu ly",
+              "UrlImage": "https://cdn2.cellphones.com.vn/insecure/rs:fill:300:0/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-16-xanh-luu-ly.png",
+              "ItemID": "00000000-0000-0000-0000-000000000105"
+            }
+          ],
+          "Variants": [
+            {
+              "VariantID": "00000000-0000-0000-0000-000000004001",
+              "ItemID": "00000000-0000-0000-0000-000000000105",
+              "ColorID": "11111111-aaaa-1111-aaaa-11111111aaaa",
+              "Storage": "128GB",
+              "CostPrice": 850,
+              "SellingPrice": 1000,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000004002",
+              "ItemID": "00000000-0000-0000-0000-000000000105",
+              "ColorID": "11111111-aaaa-1111-aaaa-11111111aaaa",
+              "Storage": "256GB",
+              "CostPrice": 950,
+              "SellingPrice": 1100,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000004003",
+              "ItemID": "00000000-0000-0000-0000-000000000105",
+              "ColorID": "11111111-aaaa-1111-aaaa-11111111aaaa",
+              "Storage": "512GB",
+              "CostPrice": 1050,
+              "SellingPrice": 1200,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000004004",
+              "ItemID": "00000000-0000-0000-0000-000000000105",
+              "ColorID": "22222222-bbbb-2222-bbbb-22222222bbbb",
+              "Storage": "128GB",
+              "CostPrice": 850,
+              "SellingPrice": 1000,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000004005",
+              "ItemID": "00000000-0000-0000-0000-000000000105",
+              "ColorID": "22222222-bbbb-2222-bbbb-22222222bbbb",
+              "Storage": "256GB",
+              "CostPrice": 950,
+              "SellingPrice": 1100,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000004006",
+              "ItemID": "00000000-0000-0000-0000-000000000105",
+              "ColorID": "22222222-bbbb-2222-bbbb-22222222bbbb",
+              "Storage": "512GB",
+              "CostPrice": 1050,
+              "SellingPrice": 1200,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000004007",
+              "ItemID": "00000000-0000-0000-0000-000000000105",
+              "ColorID": "33333333-cccc-3333-cccc-33333333cccc",
+              "Storage": "128GB",
+              "CostPrice": 850,
+              "SellingPrice": 1000,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000004008",
+              "ItemID": "00000000-0000-0000-0000-000000000105",
+              "ColorID": "33333333-cccc-3333-cccc-33333333cccc",
+              "Storage": "256GB",
+              "CostPrice": 950,
+              "SellingPrice": 1100,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000004009",
+              "ItemID": "00000000-0000-0000-0000-000000000105",
+              "ColorID": "33333333-cccc-3333-cccc-33333333cccc",
+              "Storage": "512GB",
+              "CostPrice": 1050,
+              "SellingPrice": 1200,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000004010",
+              "ItemID": "00000000-0000-0000-0000-000000000105",
+              "ColorID": "44444444-dddd-4444-dddd-44444444dddd",
+              "Storage": "128GB",
+              "CostPrice": 850,
+              "SellingPrice": 1000,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000004011",
+              "ItemID": "00000000-0000-0000-0000-000000000105",
+              "ColorID": "44444444-dddd-4444-dddd-44444444dddd",
+              "Storage": "256GB",
+              "CostPrice": 950,
+              "SellingPrice": 1100,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000004012",
+              "ItemID": "00000000-0000-0000-0000-000000000105",
+              "ColorID": "44444444-dddd-4444-dddd-44444444dddd",
+              "Storage": "512GB",
+              "CostPrice": 1050,
+              "SellingPrice": 1200,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000004013",
+              "ItemID": "00000000-0000-0000-0000-000000000105",
+              "ColorID": "55555555-eeee-5555-eeee-55555555eeee",
+              "Storage": "128GB",
+              "CostPrice": 850,
+              "SellingPrice": 1000,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000004014",
+              "ItemID": "00000000-0000-0000-0000-000000000105",
+              "ColorID": "55555555-eeee-5555-eeee-55555555eeee",
+              "Storage": "256GB",
+              "CostPrice": 950,
+              "SellingPrice": 1100,
+              "StockQuantity": 50
+            },
+            {
+              "VariantID": "00000000-0000-0000-0000-000000004015",
+              "ItemID": "00000000-0000-0000-0000-000000000105",
+              "ColorID": "55555555-eeee-5555-eeee-55555555eeee",
+              "Storage": "512GB",
+              "CostPrice": 1050,
+              "SellingPrice": 1200,
+              "StockQuantity": 50
+            }
+          ]
         }
       ]
     }
