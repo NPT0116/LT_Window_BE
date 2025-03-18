@@ -5,6 +5,7 @@ using src.Dto.ItemGroup;
 using src.Exceptions.ItemGroup;
 using src.Interfaces;
 using src.Models;
+using src.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,9 +35,11 @@ namespace src.Repositories
             };
         }
 
-        public async Task<IEnumerable<ItemGroupDto>> GetAllAsync()
+        public async Task<IEnumerable<ItemGroupDto>> GetAllAsync(ItemGroupQueryParameter itemGroupQueryParameter)
         {
-            var itemGroups = await _context.ItemGroups.ToListAsync();
+            var itemGroups = await _context.ItemGroups
+            .Skip((itemGroupQueryParameter.PageNumber - 1) * itemGroupQueryParameter.PageSize)
+            .ToListAsync();
             return itemGroups.Select(ig => new ItemGroupDto
             {
                 ItemGroupID = ig.ItemGroupID,

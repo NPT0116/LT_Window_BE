@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using src.Dto.ItemGroup;
 using src.Interfaces;
 using src.Models;
+using src.Query;
 using src.Utils;
 using System;
 using System.Collections.Generic;
@@ -32,11 +33,12 @@ namespace src.Controllers
 
         // GET: api/ItemGroup
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] ItemGroupQueryParameter itemGroupQueryParameter)
         {
-            var itemGroupDtos = await _itemGroupRepository.GetAllAsync();
+            var itemGroupDtos = await _itemGroupRepository.GetAllAsync(itemGroupQueryParameter);
             return Ok(new Response<IEnumerable<ItemGroupDto>>(itemGroupDtos));
         }
+
         [HttpPost("Create")]
         public async Task<IActionResult> Create(ItemGroupCreateDto itemGroup)
         {

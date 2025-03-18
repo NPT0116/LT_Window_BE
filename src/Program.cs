@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using src.Data;
@@ -54,6 +55,29 @@ builder.Services.AddTransient<HtmlInvoiceService>();
 
 // Cấu hình Swagger
 builder.Services.AddControllers();
+ builder.Services.Configure<ApiBehaviorOptions>(options =>
+    {
+        options.InvalidModelStateResponseFactory = context =>
+        {
+            // Lấy danh sách các thông báo lỗi từ ModelState
+            var errors = context.ModelState
+                .Where(e => e.Value.Errors.Count > 0)
+                .SelectMany(e => e.Value.Errors)
+                .Select(e => e.ErrorMessage)
+                .ToArray();
+
+            // Tạo đối tượng lỗi theo định dạng bạn muốn
+            var errorResponse = new
+            {
+                data = (object)null,
+                succeeded = false,
+                errors = errors,
+                message = "Validation errors occurred."
+            };
+
+            return new BadRequestObjectResult(errorResponse);
+        };
+    });
 builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen(c =>
 {
