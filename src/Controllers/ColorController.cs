@@ -33,5 +33,11 @@ namespace src.Controllers
             var updatedColor = await _colorRepository.UpdateAsync(id, colorDto);
             return Ok(new Response<ColorDto>(updatedColor));
         }
+        [HttpGet("image/{variantId}")]
+        public async Task<IActionResult> GetImageByVariantId(Guid variantId)
+        {
+            var urlImage = await _colorRepository.GetImageByVariantIdAsync(variantId);
+            return Ok(new Response<string>(urlImage));
+        }
     }
 }
