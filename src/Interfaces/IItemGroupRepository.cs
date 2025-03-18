@@ -9,7 +9,7 @@ namespace src.Interfaces;
 public interface IItemGroupRepository
 {
     Task<ItemGroupDto> GetByIdAsync(Guid id);
-    Task<IEnumerable<ItemGroupDto>> GetAllAsync(ItemGroupQueryParameter itemGroupQueryParameter);
+    Task<PagedResponse<IEnumerable<ItemGroupDto>>> GetAllAsync(ItemGroupQueryParameter itemGroupQueryParameter);
     Task AddAsync(ItemGroup entity);
     void Update(ItemGroup entity);
     Task DeleteItemGroupAsync(Guid itemGroupId);
