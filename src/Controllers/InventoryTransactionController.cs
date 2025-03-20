@@ -57,6 +57,16 @@ namespace src.Controllers
             await _inventoryTransactionRepository.DeleteTransaction(transactionId);
             return Ok();
         }
+        [HttpPost("inbound/list")]
+        public async Task<IActionResult> CreateListInboundTransaction([FromBody] CreateListInboundTransactionRequest list)
+        {
+            if (list == null)
+                return BadRequest("Request body cannot be null.");
+
+            var updatedVariants = await _inventoryTransactionRepository.CreateListInboundTransaction(list);
+
+            return Ok(new Response<ICollection<VariantDto>>(updatedVariants));
+        }
 
 }
 }

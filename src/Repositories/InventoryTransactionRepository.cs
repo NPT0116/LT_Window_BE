@@ -49,7 +49,45 @@ public class InventoryTransactionRepository : IInventoryTransactionRepository
             return VariantMapper.ToDto(variant);
     }
 
-public async Task DeleteTransaction(Guid transactionId)
+
+
+    public async Task<ICollection<VariantDto>> CreateListInboundTransaction(CreateListInboundTransactionRequest list)
+    {
+        var result = new List<VariantDto>();
+        foreach (var item in list.list)
+        {
+            var variant = await _context.Variants.FindAsync(item.VariantId);
+            if (variant == null)
+                throw new VariantNotFound(item.VariantId);
+            var transaction = new InventoryTransaction
+            {
+                TransactionID = Guid.NewGuid(),
+                VariantID = item.VariantId,
+                TransactionType = InventoryTransactionType.Inbound,
+                Quantity = item.Quantity,
+                TransactionDate = DateTime.UtcNow
+            };
+            var newQuantity = variant.StockQuantity + item.Quantity;
+            using var dbTransaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                _context.InventoryTransactions.Add(transaction);
+                variant.StockQuantity = newQuantity;
+                _context.Variants.Update(variant);
+                await _context.SaveChangesAsync();
+                dbTransaction.Commit();
+            }
+            catch (Exception)
+            {
+                dbTransaction.Rollback();
+                throw;
+            }
+            result.Add(VariantMapper.ToDto(variant));
+        }
+        return result;
+    }
+
+    public async Task DeleteTransaction(Guid transactionId)
 {
     // Lấy transaction cần xóa
     var transaction = await _context.InventoryTransactions.FindAsync(transactionId);

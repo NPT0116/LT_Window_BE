@@ -38,11 +38,15 @@ namespace src.Repositories
 
         public async Task<PagedResponse<IEnumerable<ItemGroupDto>>> GetAllAsync(ItemGroupQueryParameter itemGroupQueryParameter)
         {
-            var itemGroups = await _context.ItemGroups
-            .Skip((itemGroupQueryParameter.PageNumber - 1) * itemGroupQueryParameter.PageSize)
-            .ToListAsync();
+            var itemGroups =  _context.ItemGroups
+            .Skip((itemGroupQueryParameter.PageNumber - 1) * itemGroupQueryParameter.PageSize).AsQueryable();
+            if (itemGroupQueryParameter.ItemGroupName != null)
+            {
+                itemGroups = itemGroups.Where(itemGroup => itemGroup.ItemGroupName.StartsWith(itemGroupQueryParameter.ItemGroupName));
+            }
+            var result = await itemGroups.ToListAsync();
             var response  = new PagedResponse<IEnumerable<ItemGroupDto>>(
-                data: itemGroups.Select(itemGroup => new ItemGroupDto
+                data: result.Select(itemGroup => new ItemGroupDto
                 {
                     ItemGroupID = itemGroup.ItemGroupID,
                     ItemGroupName = itemGroup.ItemGroupName
