@@ -38,19 +38,30 @@ namespace src.Repositories
 
         public async Task<PagedResponse<IEnumerable<ItemGroupDto>>> GetAllAsync(ItemGroupQueryParameter itemGroupQueryParameter)
         {
-            var itemGroups =  _context.ItemGroups
-            .Skip((itemGroupQueryParameter.PageNumber - 1) * itemGroupQueryParameter.PageSize).AsQueryable();
-            if (itemGroupQueryParameter.ItemGroupName != null)
-            {
-                itemGroups = itemGroups.Where(itemGroup => itemGroup.ItemGroupName.StartsWith(itemGroupQueryParameter.ItemGroupName));
-            }
-            var result = await itemGroups.ToListAsync();
-            var data = result.Select(itemGroup => new ItemGroupDto
+            var query = _context.ItemGroups.AsQueryable();
+            
+            // First apply the filter
+if (itemGroupQueryParameter.ItemGroupName != null)
+{
+    var searchTerm = itemGroupQueryParameter.ItemGroupName.ToLower();
+    query = query.Where(itemGroup => itemGroup.ItemGroupName.ToLower().StartsWith(searchTerm));
+}
+
+            // Get total count for pagination metadata
+            var totalItemGroups = await query.CountAsync();
+            
+            // Then apply pagination
+            var itemGroups = await query
+                .Skip((itemGroupQueryParameter.PageNumber - 1) * itemGroupQueryParameter.PageSize)
+                .Take(itemGroupQueryParameter.PageSize)
+                .ToListAsync();
+            
+            var data = itemGroups.Select(itemGroup => new ItemGroupDto
             {
                 ItemGroupID = itemGroup.ItemGroupID,
                 ItemGroupName = itemGroup.ItemGroupName
             });
-            var totalItemGroups = await _context.ItemGroups.CountAsync();
+            
             return new PagedResponse<IEnumerable<ItemGroupDto>>(data, itemGroupQueryParameter.PageNumber, itemGroupQueryParameter.PageSize){
                 TotalRecords = totalItemGroups,
                 TotalPages = (int)Math.Ceiling(totalItemGroups / (double)itemGroupQueryParameter.PageSize)
@@ -67,7 +78,7 @@ namespace src.Repositories
             _context.ItemGroups.Update(entity);
         }
 
-   public async Task DeleteItemGroupAsync(Guid itemGroupId)
+        public async Task DeleteItemGroupAsync(Guid itemGroupId)
         {
             var itemGroup = await _context.ItemGroups.FindAsync(itemGroupId);
             if (itemGroup == null)
@@ -86,7 +97,6 @@ namespace src.Repositories
 
             await _context.SaveChangesAsync();
         }
-
 
         public async Task SaveChangesAsync()
         {
