@@ -45,16 +45,16 @@ namespace src.Repositories
                 itemGroups = itemGroups.Where(itemGroup => itemGroup.ItemGroupName.StartsWith(itemGroupQueryParameter.ItemGroupName));
             }
             var result = await itemGroups.ToListAsync();
-            var response  = new PagedResponse<IEnumerable<ItemGroupDto>>(
-                data: result.Select(itemGroup => new ItemGroupDto
-                {
-                    ItemGroupID = itemGroup.ItemGroupID,
-                    ItemGroupName = itemGroup.ItemGroupName
-                }),
-                pageNumber: itemGroupQueryParameter.PageNumber,
-                pageSize: itemGroupQueryParameter.PageSize
-            );
-            return response;
+            var data = result.Select(itemGroup => new ItemGroupDto
+            {
+                ItemGroupID = itemGroup.ItemGroupID,
+                ItemGroupName = itemGroup.ItemGroupName
+            });
+            var totalItemGroups = await _context.ItemGroups.CountAsync();
+            return new PagedResponse<IEnumerable<ItemGroupDto>>(data, itemGroupQueryParameter.PageNumber, itemGroupQueryParameter.PageSize){
+                TotalRecords = totalItemGroups,
+                TotalPages = (int)Math.Ceiling(totalItemGroups / (double)itemGroupQueryParameter.PageSize)
+            };
         }
 
         public async Task AddAsync(ItemGroup entity)

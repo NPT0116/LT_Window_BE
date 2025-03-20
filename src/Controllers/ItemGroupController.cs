@@ -36,7 +36,7 @@ namespace src.Controllers
         public async Task<IActionResult> GetAll([FromQuery] ItemGroupQueryParameter itemGroupQueryParameter)
         {
             var itemGroupDtos = await _itemGroupRepository.GetAllAsync(itemGroupQueryParameter);
-            return Ok(new Response<PagedResponse<IEnumerable<ItemGroupDto>>>(itemGroupDtos));
+            return Ok(itemGroupDtos);
         }
 
         [HttpPost("Create")]
