@@ -22,21 +22,34 @@ namespace src.Repositories
             _context = context;
         }
 
-        public async Task<VariantDto> GetVariantByIdAsync(Guid id)
+        public async Task<GetAllVariant> GetVariantByIdAsync(Guid id)
         {
             var variant = await _context.Variants
                 .Where(v => v.VariantID == id)
+                .Include(v => v.Color)
+                .Include(v => v.Item)
+                .Select(v => new GetAllVariant
+                {
+                    VariantID = v.VariantID,
+                    itemDto = new ItemDto
+                    {
+                        ItemID = v.Item.ItemID,
+                        ItemName = v.Item.ItemName,
+                    },
+                    colorDto = new ColorDto
+                    {
+                        ColorID = v.Color.ColorID,
+                        Name = v.Color.Name,
+                        UrlImage = v.Color.UrlImage
+                        
+                    },
+                    Storage = v.Storage,
+                    CostPrice = v.CostPrice,
+                    SellingPrice = v.SellingPrice,
+                    StockQuantity = v.StockQuantity
+                })
                 .FirstOrDefaultAsync();
-            return new VariantDto
-            {
-                VariantID = variant.VariantID,
-                ItemID = variant.ItemID,
-                ColorID = variant.ColorID,
-                Storage = variant.Storage,
-                CostPrice = variant.CostPrice,
-                SellingPrice = variant.SellingPrice,
-                StockQuantity = variant.StockQuantity
-            };
+            return variant;
         }
 
         // Nếu bạn cập nhật interface để trả về ICollection<VariantDto>

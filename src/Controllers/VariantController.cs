@@ -36,7 +36,7 @@ namespace src.Controllers
             var variantDto = await _variantRepository.GetVariantByIdAsync(id);
             if (variantDto == null)
                 return NotFound(new Response<object>(null, "Variant not found", false));
-            return Ok(new Response<VariantDto>(variantDto));
+            return Ok(new Response<GetAllVariant>(variantDto));
         }
 
         [HttpPut("{id}")]
