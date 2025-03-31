@@ -27,7 +27,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-
+Console.WriteLine(builder.Configuration.GetConnectionString("DefaultConnection"));
 // Global exception handler
 builder.Services.AddExceptionHandler<GlobalExceptionHandlers>();
 
@@ -129,12 +129,11 @@ var app = builder.Build();
 
 app.UseCors("AllowAllOrigins");
 
-if (app.Environment.IsDevelopment())
-{
+
     app.MapOpenApi();
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+
 
 // Nếu có tham số "--resetdb", tự động reset và seed DB
 if (resetDb)

@@ -1,0 +1,44 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5142:80"
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=postgres;Database=windowPos;Username=postgres;Password=thanh2004
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    container_name: LT_Window_Pos_DB
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=thanh2004
+      - POSTGRES_DB=windowPos
+    ports:
+      - "5430:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Uncomment this if you need a frontend container
+  # frontend:
+  #   build:
+  #     context: ./LT_Window_FE
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "3000:80"
+  #   networks:
+  #     - lt-network
+  #   depends_on:
+  #     - backend
+
+networks:
+  lt-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
